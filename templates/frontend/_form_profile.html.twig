@@ -48,7 +48,7 @@
 
 <div class="text-end mt-5">
     {{ form_widget(form) }}
-    <a href="{{ absolute_url(path('app_frontend_beneficiaire_show',{'matricule': beneficiaire.matricule})) }}" class="btn btn-outline-secondary">Annuler</a>
+    <a href="{{ absolute_url(path('app_frontend_beneficiaire_profile')) }}" class="btn btn-outline-secondary">Annuler</a>
     <button type="submit" class="btn btn-main">{{ button_label|default('Enregistrer') }}</button>
 </div>
 {{ form_end(form) }}
