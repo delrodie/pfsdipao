@@ -27,3 +27,4 @@ services:
     App\Service\GestionMedia:
         arguments:
             $profileDirectory: '%kernel.project_dir%/public/upload/profile'
+            $cvDirectory: '%kernel.project_dir%/public/upload/cv'

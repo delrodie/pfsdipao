@@ -3,11 +3,13 @@
 namespace App\Service;
 
 use App\Repository\BeneficiaireRepository;
+use App\Repository\CuriculumRepository;
 
 class AllRepositories
 {
     public function __construct(
         private BeneficiaireRepository $beneficiaireRepository,
+        private CuriculumRepository $curiculumRepository,
     )
     {
     }
@@ -24,5 +26,10 @@ class AllRepositories
         }
 
         return $this->beneficiaireRepository->findOneBy([],['id' => 'DESC']);
+    }
+
+    public function getOneCV(object $user)
+    {
+        return $this->curiculumRepository->findOneBy(['user' => $user]);
     }
 }

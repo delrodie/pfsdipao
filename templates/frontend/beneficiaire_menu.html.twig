@@ -8,13 +8,15 @@
                 <a href="#" class="nav-link"><i class="bi bi-info-circle"></i> Informations</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link {{ menu_active('app_frontend_beneficiaire_profile') }} {{ menu_active('app_frontend_beneficiaire_show') }}"><i
+                <a href="{{ absolute_url(path('app_frontend_beneficiaire_profile')) }}" class="nav-link {{ menu_active('app_frontend_beneficiaire_profile') }} {{ menu_active('app_frontend_beneficiaire_show') }}"><i
                             class="bi bi-person-bounding-box"></i> Profile</a>
             </li>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% if app.user.statut == 'EMPLOI' %}
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="bi bi-card-list"></i> Mon CV</a>
+                        <a href="{{ absolute_url(path('app_frontend_curiculum_upload')) }}" class="nav-link {{ menu_active('app_frontend_curiculum_upload') }} {{ menu_active('app_frontend_curiculum_show') }}">
+                            <i class="bi bi-card-list"></i> Mon CV
+                        </a>
                     </li>
                 {% else %}
                     <li class="nav-item">

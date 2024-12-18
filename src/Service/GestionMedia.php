@@ -9,11 +9,13 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 class GestionMedia
 {
     private $mediaProfile;
+    private $mediaCV;
     public function __construct(
-        $profileDirectory
+        $profileDirectory, $cvDirectory,
     )
     {
         $this->mediaProfile = $profileDirectory;
+        $this->mediaCV = $cvDirectory;
     }
 
     /**
@@ -54,6 +56,7 @@ class GestionMedia
         // Deplacement du fichier dans le repertoire dedié
         try { //dd($media);
             if ($media === 'profile') $file->move($this->mediaProfile, $newFilename);
+            elseif ($media === 'cv') $file->move($this->mediaCV, $newFilename);
             else $file->move($this->mediaProfile, $newFilename);
         }catch (FileException $e){
 
@@ -72,6 +75,7 @@ class GestionMedia
     public function removeUpload($ancienMedia, $media = null): bool
     {
         if ($media === 'profile') unlink($this->mediaProfile.'/'.$ancienMedia);
+        elseif ($media === 'cv') unlink($this->mediaCV.'/'.$ancienMedia);
         else return false;
 
         return true;
