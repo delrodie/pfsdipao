@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="profile" id="profile">
+        <div class="container">
+            <div class="row">
+                {% include 'frontend/beneficiaire_menu.html.twig' %}
+                <div class="col-12 col-lg-9 profile-content">
+                    <h2 class="titre">Mes informations personnelles</h2>
+
+                    {{ include('frontend/_form_profile.html.twig', {'button_label': 'Modifier'}) }}
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}{{ parent() }} Mon profile{% endblock %}
+
+{% block breadcrumb %}
+    <section class="bread" id="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="#">Mon espace</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Identifiction</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css">
+    <style>
+        label{
+            color: #5e5d5d;
+            font-style: italic;
+            font-size: .9rem;
+        }
+        .form-control{
+            font-weight: 500;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ absolute_url(asset('assets/js/jquery-3.7.1.min.js')) }}"></script>
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+    <script src="{{ absolute_url(asset('assets/js/upload-init.js')) }}"></script>
+
+    <script>
+        // Initialiser Dropify et Select2 avec Turbo
+        function initializeComponents() {
+            // Initialisation de Dropify
+            $('.dropify').dropify();
+
+            // Initialisation de Select2
+            $('.select-2').select2();
+        }
+
+        // Écouter l'événement Turbo pour initialiser les bibliothèques après le chargement de Turbo
+        document.addEventListener('turbo:load', function() {
+            initializeComponents();
+        });
+
+        // Si vous utilisez des frames Turbo, écoutez aussi cet événement
+        document.addEventListener('turbo:frame-render', function() {
+            initializeComponents();
+        });
+
+        // Pour le premier chargement de la page
+        $(document).ready(function() {
+            initializeComponents();
+        });
+    </script>
+{% endblock %}

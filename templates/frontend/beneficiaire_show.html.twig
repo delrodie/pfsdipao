@@ -125,7 +125,7 @@
 
                     <div class="text-end mt-5">
                         <a href="#" class="btn btn-outline-secondary btn-sm">Annuler</a>
-                        <a href="#" class="btn btn-main btn-sm">Modifier</a>
+                        <a href="{{ absolute_url(path('app_frontend_beneficiaire_modifier',{"matricule": beneficiaire.matricule})) }}" class="btn btn-main btn-sm">Modifier</a>
                     </div>
                 </div>
             </div>

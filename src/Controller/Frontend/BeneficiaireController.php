@@ -74,7 +74,9 @@ class BeneficiaireController extends AbstractController
     {
         $beneficiaire = $this->allRepositories->getOneBeneficiaire($matricule);
         if (!$beneficiaire){
-            dd('Beneficiare');
+            sweetalert()->error("Le matricule n'a pas été trouvé. Veuillez-vous enregistrer",[],'Echec!');
+
+            return $this->redirectToRoute('app_frontend_beneficiaire_profile');
         }
 
         return $this->render('frontend/beneficiaire_show.html.twig',[
@@ -85,6 +87,36 @@ class BeneficiaireController extends AbstractController
     #[Route('/{matricule}/modifier', name: 'app_frontend_beneficiaire_modifier', methods: ['GET', 'POST'])]
     public function modifier(Request $request, $matricule): Response
     {
+        // Verification de l'existance du bénéficiaire
+        $beneficiaire = $this->allRepositories->getOneBeneficiaire(null, $this->getUser());
+        if (!$beneficiaire){
+            sweetalert()->error("Votre compte n'est pas associé à un profile. Veuillez vous inscire",[], 'Echèc!');
+            return $this->redirectToRoute('app_frontend_beneficiaire_profile');
+        }
 
+        $form = $this->createForm(BeneficiaireFormType::class, $beneficiaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $this->gestionMedia->media($form, $beneficiaire, 'profile');
+
+            $beneficiaire->setSlug($this->utilities->slug(
+                $beneficiaire->getNom().'-'
+                .$beneficiaire->getPrenom().'-'
+                .$beneficiaire->getTelephone()
+            ));
+
+            $this->entityManager->flush();
+
+            notyf()->success("Votre profile a été modifié avec succès!");
+
+            return $this->redirectToRoute('app_frontend_beneficiaire_show',[
+                'matricule' => $beneficiaire->getMatricule()
+            ]);
+        }
+        return $this->render('frontend/beneficiaire_profile_edit.html.twig', [
+            'beneficiaire' => $beneficiaire,
+            'form' => $form
+        ]);
     }
 }
