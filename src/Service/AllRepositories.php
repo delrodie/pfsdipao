@@ -32,4 +32,9 @@ class AllRepositories
     {
         return $this->curiculumRepository->findOneBy(['user' => $user]);
     }
+
+    public function getAllBeneficiaireByStatut(string $statut)
+    {
+        return $this->beneficiaireRepository->findAllByCategorie($statut);
+    }
 }

@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Beneficiaire{% endblock %}
+
+{% block body %}
+    <h1>Beneficiaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ beneficiaire.id }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ beneficiaire.matricule }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ beneficiaire.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ beneficiaire.prenom }}</td>
+            </tr>
+            <tr>
+                <th>DateNaissance</th>
+                <td>{{ beneficiaire.dateNaissance ? beneficiaire.dateNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>LieuNaissance</th>
+                <td>{{ beneficiaire.lieuNaissance }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ beneficiaire.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Nationalite</th>
+                <td>{{ beneficiaire.nationalite }}</td>
+            </tr>
+            <tr>
+                <th>Region</th>
+                <td>{{ beneficiaire.region }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ beneficiaire.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ beneficiaire.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Media</th>
+                <td>{{ beneficiaire.media }}</td>
+            </tr>
+            <tr>
+                <th>EnfantFamille</th>
+                <td>{{ beneficiaire.enfantFamille }}</td>
+            </tr>
+            <tr>
+                <th>EnfantCharge</th>
+                <td>{{ beneficiaire.enfantCharge }}</td>
+            </tr>
+            <tr>
+                <th>Matrimoniale</th>
+                <td>{{ beneficiaire.matrimoniale }}</td>
+            </tr>
+            <tr>
+                <th>Hebergement</th>
+                <td>{{ beneficiaire.hebergement }}</td>
+            </tr>
+            <tr>
+                <th>TypeRessource</th>
+                <td>{{ beneficiaire.typeRessource }}</td>
+            </tr>
+            <tr>
+                <th>NomRessource</th>
+                <td>{{ beneficiaire.nomRessource }}</td>
+            </tr>
+            <tr>
+                <th>TelephoneRessource</th>
+                <td>{{ beneficiaire.telephoneRessource }}</td>
+            </tr>
+            <tr>
+                <th>AdresseRessource</th>
+                <td>{{ beneficiaire.adresseRessource }}</td>
+            </tr>
+            <tr>
+                <th>Analphabete</th>
+                <td>{{ beneficiaire.analphabete ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>NiveauEtude</th>
+                <td>{{ beneficiaire.niveauEtude }}</td>
+            </tr>
+            <tr>
+                <th>Diplome</th>
+                <td>{{ beneficiaire.diplome }}</td>
+            </tr>
+            <tr>
+                <th>NiveauFormation</th>
+                <td>{{ beneficiaire.niveauFormation }}</td>
+            </tr>
+            <tr>
+                <th>NatureFormation</th>
+                <td>{{ beneficiaire.natureFormation }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ beneficiaire.slug }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ beneficiaire.createdAt ? beneficiaire.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_backend_beneficiaire_index') }}">back to list</a>
+
+    <a href="{{ path('app_backend_beneficiaire_edit', {'id': beneficiaire.id}) }}">edit</a>
+
+    {{ include('backend_beneficiaire/_delete_form.html.twig') }}
+{% endblock %}

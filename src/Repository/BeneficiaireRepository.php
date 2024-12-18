@@ -16,6 +16,19 @@ class BeneficiaireRepository extends ServiceEntityRepository
         parent::__construct($registry, Beneficiaire::class);
     }
 
+    public function findAllByCategorie(string $statut)
+    {
+        return $this->createQueryBuilder('b')
+            ->addSelect('u')
+            ->join('b.user', 'u')
+            ->where('u.statut = :statut')
+            ->orderBy('b.nom', 'ASC')
+            ->addOrderBy('b.prenom', 'ASC')
+            ->setParameter('statut', $statut)
+            ->getQuery()->getResult()
+            ;
+    }
+
     //    /**
     //     * @return Beneficiaire[] Returns an array of Beneficiaire objects
     //     */
