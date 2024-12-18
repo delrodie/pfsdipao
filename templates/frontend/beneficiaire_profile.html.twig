@@ -1,0 +1,182 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="profile" id="profile">
+        <div class="container">
+            <div class="row">
+                {% include 'frontend/beneficiaire_menu.html.twig' %}
+                <div class="col-12 col-lg-9 profile-content">
+                    <h2 class="titre">Mes informations personnelles</h2>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Identité & adresse</legend>
+                        <div class="row block">
+                            <div class="col-md-4 col-lg-4 mt-3">
+                                <img src="assets/img/user2.png" alt="" class="img-fluid avatar">
+                            </div>
+                            <div class="col-md-8 col-lg-8">
+                                <div class="row form-group">
+                                    <div class="col-12 mt-3">
+                                        <label for="nom">Nom de famille</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <label for="prenoms">Prenoms</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="col-lg-4 mt-2">
+                                        <label for="dateNaissance">Date de naissance</label>
+                                        <input type="date" class="form-control">
+                                    </div>
+                                    <div class="col-lg-8 mt-2">
+                                        <label for="lieuNaissance">Lieu de naissance</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-2 mt-3">
+                                <label for="sexe">Sexe</label>
+                                <select name="" id="" class="form-select">
+                                    <option value="Homme">HOMME</option>
+                                    <option value="Femme">FEMME</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-lg-4 mt-3">
+                                <label for="nationalite">Nationalité</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-lg-6 mt-3">
+                                <label for="region">Région d'origine</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-lg-4 mt-2">
+                                <label for="telephone">Telephone</label>
+                                <input type="tel" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-lg-8 mt-2">
+                                <label for="adresse">Adresse</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Situation familiale</legend>
+
+                        <div class="row block">
+                            <div class="col-md-6 mt-3">
+                                <label for="enfant">Nombre d'enfants dans la famille</label>
+                                <input type="number" class="form-control">
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="charge">Nombre d'enfant à charge</label>
+                                <input type="number" class="form-control">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="situation">Situation matrimoniale: </label>
+                                <select name="" id="" class="form-select">
+                                    <option value="1">Célibataire</option>
+                                    <option value="2">Marié</option>
+                                    <option value="3">Concubinage</option>
+                                    <option value="4">Divorcé</option>
+                                    <option value="5">Veuf</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="hebergement">Hebergement</label>
+                                <select name="" id="" class="form-select">
+                                    <option value="1">Chez moi</option>
+                                    <option value="2">Chez mes parents</option>
+                                    <option value="3">Chez mes amis</option>
+                                    <option value="4">Autres</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="type">Personne ressource (PS)</label>
+                                <select name="" id="" class="form-select">
+                                    <option value="1">Père</option>
+                                    <option value="2">Mère</option>
+                                    <option value="3">Tuteur/tutrice</option>
+                                    <option value="4">Conjoint(e)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="tuteur">Nom & prenoms de la PS</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="telephone">Telephone de la PS</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="adresse">Adresse de la PS</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Formation</legend>
+
+                        <div class="row block">
+                            <div class="col-md-4 mt-3">
+                                <label for="analphabete">Analphabete</label>
+                                <select name="" id="" class="form-select">
+                                    <option value="1">OUI</option>
+                                    <option value="2">NON</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <label for="niveau">Niveau d'étude</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <label for="diplome">Diplôme</label>
+                                <select name="" id="" class="form-select">
+                                    <option value="1">CEPE</option>
+                                    <option value="2">BEPC</option>
+                                    <option value="3">CAP</option>
+                                    <option value="4">BAC</option>
+                                    <option value="5">BT</option>
+                                    <option value="6">BTS</option>
+                                    <option value="7">Licence</option>
+                                    <option value="8">Maitrise</option>
+                                    <option value="9">Autres</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="formation">Niveau formation professionnelle</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="nature">Nature formation professionnelle</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="text-end mt-5">
+                        <button type="submit" class="btn btn-main">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}{{ parent() }} Mon profile{% endblock %}
+
+{% block breadcrumb %}
+    <section class="bread" id="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="#">Mon espace</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Identifiction</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+{% endblock %}
+

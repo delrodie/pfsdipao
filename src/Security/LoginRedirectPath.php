@@ -51,8 +51,7 @@ class LoginRedirectPath
     protected function getPath($statut): string
     {
         return match ($statut){
-            'EMPLOI' => $this->router->generate('app_frontend_emploi_tbord'),
-            'PROJET' => $this->router->generate('app_frontend_projet_tbord'),
+            'EMPLOI', 'PROJET' => $this->router->generate('app_frontend_beneficiaire_profile'),
             'ADMIN' => $this->router->generate('app_backend_dashboard'),
             default => $this->router->generate('app_home'),
         };
