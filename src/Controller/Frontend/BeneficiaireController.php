@@ -4,16 +4,87 @@ declare(strict_types=1);
 
 namespace App\Controller\Frontend;
 
+use App\Entity\Beneficiaire;
+use App\Form\BeneficiaireFormType;
+use App\Service\AllRepositories;
+use App\Service\GestionMedia;
+use App\Service\Utilities;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/beneficiaire')]
 class BeneficiaireController extends AbstractController
 {
-    #[Route('/', name: "app_frontend_beneficiaire_profile")]
-    public function profile(): Response
+    public function __construct(
+        private AllRepositories $allRepositories,
+        private EntityManagerInterface $entityManager,
+        private GestionMedia $gestionMedia,
+        private Utilities $utilities
+    )
     {
-        return $this->render('frontend/beneficiaire_profile.html.twig');
+
+    }
+    #[Route('/', name: "app_frontend_beneficiaire_profile")]
+    public function profile(Request $request): Response
+    {
+        // Verification de l'existance du bénéficiaire
+        $verif = $this->allRepositories->getOneBeneficiaire(null, $this->getUser());
+        if ($verif){
+            return $this->redirectToRoute('app_frontend_beneficiaire_show',[
+                'matricule' => $verif->getMatricule()
+            ]);
+        }
+
+        $beneficiaire = new Beneficiaire();
+        $form = $this->createForm(BeneficiaireFormType::class, $beneficiaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $this->gestionMedia->media($form, $beneficiaire, 'profile');
+            $beneficiaire->setMatricule($this->utilities->matricule());
+
+            $beneficiaire->setSlug($this->utilities->slug(
+                $beneficiaire->getNom().'-'
+                .$beneficiaire->getPrenom().'-'
+                .$beneficiaire->getTelephone()
+            ));
+
+            $beneficiaire->setUser($this->getUser());
+
+            $this->entityManager->persist($beneficiaire);
+            $this->entityManager->flush();
+
+            notyf()->success("Votre profile a été enregistré avec succès!");
+
+            return $this->redirectToRoute('app_frontend_beneficiaire_show',[
+                'matricule' => $beneficiaire->getMatricule()
+            ]);
+        }
+        return $this->render('frontend/beneficiaire_profile.html.twig', [
+            'beneficiaire' => $beneficiaire,
+            'form' => $form
+        ]);
+    }
+
+    #[Route('/{matricule}', name: "app_frontend_beneficiaire_show", methods: ['GET'])]
+    public function show($matricule): Response
+    {
+        $beneficiaire = $this->allRepositories->getOneBeneficiaire($matricule);
+        if (!$beneficiaire){
+            dd('Beneficiare');
+        }
+
+        return $this->render('frontend/beneficiaire_show.html.twig',[
+            'beneficiaire' => $beneficiaire
+        ]);
+    }
+
+    #[Route('/{matricule}/modifier', name: 'app_frontend_beneficiaire_modifier', methods: ['GET', 'POST'])]
+    public function modifier(Request $request, $matricule): Response
+    {
+
     }
 }

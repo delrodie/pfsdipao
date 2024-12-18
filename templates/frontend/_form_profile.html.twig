@@ -1,0 +1,54 @@
+{{ form_start(form) }}
+<fieldset class="reset mt-5">
+    <legend class="reset">Identité & adresse</legend>
+    <div class="row block">
+        <div class="col-md-4 col-lg-4 mt-3">{{ form_row(form.media) }}</div>
+        <div class="col-md-8 col-lg-8">
+            <div class="row form-group">
+                <div class="col-12 mt-3">{{ form_row(form.nom) }}</div>
+                <div class="col-12 mt-2">{{ form_row(form.prenom) }}</div>
+                <div class="col-lg-4 mt-2">{{form_row(form.dateNaissance)}}</div>
+                <div class="col-lg-8 mt-2">{{form_row(form.lieuNaissance)}}</div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2 mt-3">{{form_row(form.sexe)}}</div>
+        <div class="col-md-6 col-lg-4 mt-3">{{form_row(form.nationalite)}}</div>
+        <div class="col-md-6 col-lg-6 mt-3">{{form_row(form.region)}}</div>
+        <div class="col-md-6 col-lg-4 mt-2">{{form_row(form.telephone)}}</div>
+        <div class="col-md-6 col-lg-8 mt-2">{{form_row(form.adresse)}}</div>
+    </div>
+</fieldset>
+
+<fieldset class="reset mt-5">
+    <legend class="reset">Situation familiale</legend>
+
+    <div class="row block">
+        <div class="col-md-6 mt-3">{{form_row(form.enfantFamille)}}</div>
+        <div class="col-md-6 mt-3">{{form_row(form.enfantCharge)}}</div>
+        <div class="col-md-6 mt-2">{{form_row(form.matrimoniale)}}</div>
+        <div class="col-md-6 mt-2">{{form_row(form.hebergement)}}</div>
+        <div class="col-md-6 mt-3">{{form_row(form.typeRessource)}}</div>
+        <div class="col-md-6 mt-3">{{form_row(form.nomRessource)}}</div>
+        <div class="col-md-6 mt-2">{{form_row(form.telephoneRessource)}}</div>
+        <div class="col-md-6 mt-2">{{form_row(form.adresseRessource)}}</div>
+    </div>
+</fieldset>
+
+<fieldset class="reset mt-5">
+    <legend class="reset">Formation</legend>
+
+    <div class="row block">
+        <div class="col-md-4 mt-3">{{form_row(form.analphabete)}}</div>
+        <div class="col-md-4 mt-3">{{form_row(form.niveauEtude)}}</div>
+        <div class="col-md-4 mt-3">{{form_row(form.diplome)}}</div>
+        <div class="col-md-6 mt-3">{{form_row(form.niveauFormation)}}</div>
+        <div class="col-md-6 mt-3">{{form_row(form.natureFormation)}}</div>
+    </div>
+</fieldset>
+
+<div class="text-end mt-5">
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-main">Enregistrer</button>
+</div>
+{{ form_end(form) }}
+

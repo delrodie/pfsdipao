@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="profile" id="profile">
+        <div class="container">
+            <div class="row">
+                {% include 'frontend/beneficiaire_menu.html.twig' %}
+                <div class="col-12 col-lg-9 profile-content">
+                    <h2 class="titre">Mes informations personnelles</h2>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Identité & adresse</legend>
+                        <div class="row block">
+                            <div class="col-md-4 col-lg-4 mt-3">
+                                <img src="{{ absolute_url(asset('upload/profile/' ~ beneficiaire.media)) }}" alt="{{ beneficiaire.nom }}" class="img-fluid avatar">
+                            </div>
+                            <div class="col-md-8 col-lg-8">
+                                <div class="row form-group">
+                                    <div class="col-12 mt-3">
+                                        <label for="nom">Nom de famille</label>
+                                        <input type="text" class="form-control" value="{{ beneficiaire.nom }}" disabled>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <label for="prenoms">Prenoms</label>
+                                        <input type="text" class="form-control" value="{{ beneficiaire.prenom }}" disabled>
+                                    </div>
+                                    <div class="col-lg-4 mt-2">
+                                        <label for="dateNaissance">Date de naissance</label>
+                                        <input type="text" class="form-control" value="{{ beneficiaire.dateNaissance|date('d/m/Y') }}" disabled>
+                                    </div>
+                                    <div class="col-lg-8 mt-2">
+                                        <label for="lieuNaissance">Lieu de naissance</label>
+                                        <input type="text" class="form-control" value="{{ beneficiaire.lieuNaissance }}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-2 mt-3">
+                                <label for="sexe">Sexe</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.sexe }}" disabled>
+                            </div>
+                            <div class="col-md-6 col-lg-4 mt-3">
+                                <label for="nationalite">Nationalité</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.nationalite }}" disabled>
+                            </div>
+                            <div class="col-md-6 col-lg-6 mt-3">
+                                <label for="region">Région d'origine</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.region }}" disabled>
+                            </div>
+                            <div class="col-md-6 col-lg-4 mt-2">
+                                <label for="telephone">Telephone</label>
+                                <input type="tel" class="form-control" value="{{ beneficiaire.telephone }}" disabled>
+                            </div>
+                            <div class="col-md-6 col-lg-8 mt-2">
+                                <label for="adresse">Adresse</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.adresse }}" disabled>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Situation familiale</legend>
+
+                        <div class="row block">
+                            <div class="col-md-6 mt-3">
+                                <label for="enfant">Nombre d'enfants dans la famille</label>
+                                <input type="number" class="form-control" value="{{ beneficiaire.enfantFamille }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="charge">Nombre d'enfant à charge</label>
+                                <input type="number" class="form-control" value="{{ beneficiaire.enfantCharge }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="situation">Situation matrimoniale: </label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.matrimoniale }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="hebergement">Hebergement</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.hebergement }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="type">Personne ressource (PS)</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.typeRessource }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="tuteur">Nom & prenoms de la PS</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.nomRessource }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="telephone">Telephone de la PS</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.telephoneRessource }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="adresse">Adresse de la PS</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.adresseRessource }}" disabled>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Formation</legend>
+
+                        <div class="row block">
+                            <div class="col-md-4 mt-3">
+                                <label for="analphabete">Analphabete</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.analphabete ? 'OUI' : 'NON' }}" disabled>
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <label for="niveau">Niveau d'étude</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.niveauEtude }}" disabled>
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <label for="diplome">Diplôme</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.diplome }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="formation">Niveau formation professionnelle</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.niveauFormation }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="nature">Nature formation professionnelle</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.natureFormation }}" disabled>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="text-end mt-5">
+                        <a href="#" class="btn btn-outline-secondary btn-sm">Annuler</a>
+                        <a href="#" class="btn btn-main btn-sm">Modifier</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}{{ parent() }} Mon profile{% endblock %}
+
+{% block breadcrumb %}
+    <section class="bread" id="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="#">Mon espace</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Identifiction</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        label{
+            color: #5e5d5d;
+            font-style: italic;
+            font-size: .9rem;
+        }
+        .form-control{
+            font-weight: 500;
+        }
+    </style>
+{% endblock %}
