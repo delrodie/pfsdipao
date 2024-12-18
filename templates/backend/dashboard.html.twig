@@ -1,0 +1,234 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 d-flex align-items-strech">
+                <div class="card w-100">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-semibold">Statistiques</h5>
+                        <p class="card-subtitle mb-0">Statistiques de inscris par pôle</p>
+                        <div class="owl-carousel collectibles-carousel owl-theme mt-9">
+
+                            {% for grade in  ['Emploi', 'Projet'] %}
+                                <div class="item">
+                                    <div class="card h-100 overflow-hidden mb-4 mb-md-0 shadow-none border">
+                                        <div class="position-relative">
+{#                                            <img src="{{ asset('frontend/img/logo-activite.png') }}" class="img-fluid w-100" alt="1" />#}
+                                        </div>
+                                        <div class="p-9 text-start">
+                                            <h6 class="fw-semibold fs-4">{{ grade }}</h6>
+                                            <div class="d-flex align-items-center mt-3 justify-content-between">
+                                                <div class="fs-3">25</div>
+                                            </div>
+                                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm w-100 mt-3">Voir la liste</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 d-flex align-items-strech">
+                <div class="card w-100">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-semibold">Finances</h5>
+                        <p class="card-subtitle mb-0">Montant total prêtés</p>
+                        <div class="card overflow-hidden mt-9">
+{#                            <img src="{{ asset('backoffice/img/finance.jpg') }}" alt="bg-card" height="220">#}
+                            <div class="card-img-overlay text-white">
+                                <div class="d-flex align-items-start flex-column h-100">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card shadow-none mb-0">
+                            <div class="card-body p-0">
+                                <div class="d-flex align-items-center mb-3">
+                                    <h2 class="fw-semibold mb-0">0 FCFA</h2>
+                                </div>
+                                <div class="d-flex align-items-center">
+                        <span class="ms-1">
+                          <i class="ti-user text-primary"></i>
+                        </span>
+                                    <span class="text-dark fs-3 fw-bold ms-1">Participants</span>
+                                    <span class="text-primary fw-bold fs-3 ms-2">(0)</span>
+                                </div>
+                                <button class="btn btn-light-primary text-primary w-100 mt-3"> Voir la liste </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 d-flex align-items-strech">
+                <div class="card w-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h5 class="card-title fw-semibold">Insérés</h5>
+                                <p class="card-subtitle mb-0">Statistiques des insérés</p>
+                            </div>
+                        </div>
+                        <div class="card mt-4 mb-0 shadow-none">
+                            <div class="table-responsive">
+                                <table class="table mb-0 align-middle text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th class="ps-0">Contrats</th>
+                                        <th class="text-center">Femmes</th>
+                                        <th class="text-center">Hommes</th>
+                                        <th class="text-center">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="text-dark ">
+                                        <tr>
+                                            <td>FORMATION / APPRENTISSAGE</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                        </tr>
+                                    <tr>
+                                        <td>STAGE</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CDD</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CDI</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- recent history -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-semibold">Financement</h5>
+                        <p class="card-subtitle mb-0">Statistiques des états de financement</p>
+                        <div class="card shadow-none mt-9 mb-0">
+                            <div class="table-responsive">
+                                <table class="table mb-0 align-middle text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th class="ps-0">Prêts</th>
+                                        <th class="text-center">Femmes</th>
+                                        <th class="text-center">Hommes</th>
+                                        <th class="text-center">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="text-dark ">
+                                    <tr>
+                                        <td>Accordés</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Non accordés</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Remboursés</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Non remboursés</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <!-- end container fluid -->
+    </div>
+{% endblock %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/css/owl.carousel.min.css')) }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('backoffice/vendor/js/owl.carousel.min.js') }}"></script>
+    <script>
+        $(function () {
+            //
+            // Carousel
+            //
+            $(".collectibles-carousel").owlCarousel({
+                loop: true,
+                margin: 30,
+                mouseDrag: true,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                autoplaySpeed: 2000,
+                nav: false,
+                dots: false,
+                rtl: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    576: {
+                        items: 2,
+                    },
+                    768: {
+                        items: 3,
+                    },
+                },
+            });
+        });
+
+    </script>
+{% endblock %}
