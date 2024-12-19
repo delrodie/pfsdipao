@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
@@ -21,8 +22,17 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username', TextType::class,[
-                'attr' => ['class' => 'form-control form-control-lg', 'placeholder'=>'Nom utilisateur / N° de Télephone', 'autocomplete' => 'off'],
+                'attr' => ['class' => 'form-control form-control-lg', 'placeholder'=>'Numéro de telephone', 'autocomplete' => 'off'],
                 'label' => "Nom utilisateur",
+                'constraints' => [
+                    new NotBlank([
+                        'message' => "Veuillez entrer un numéro de téléphone"
+                    ]),
+                    new Regex([
+                        'pattern' => '/^\d{10}$/',  // 10 chiffres
+                        'message' => 'Le numéro de téléphone doit comporter exactement 10 chiffres.',
+                    ])
+                ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'attr' => ['class' => 'form-check-input'],
@@ -56,7 +66,9 @@ class RegistrationFormType extends AbstractType
             ->add('statut', ChoiceType::class, [
                 'choices' => [
                     'Je suis porteur de projet' => "PROJET",
-                    'Je cherche un emploi' => "EMPLOI"
+                    'Je cherche un emploi' => "EMPLOI",
+                    'Je cherche des contrats' => "RST",
+                    'Je cherche des formations' => "FORMATION",
                 ],
                 'multiple' => false,
                 'expanded' => true

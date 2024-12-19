@@ -46,6 +46,12 @@ class Beneficiaire
     private ?string $adresse = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    private ?string $natureCNI = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $numeroCNI = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $media = null;
 
     #[ORM\Column(nullable: true)]
@@ -95,6 +101,18 @@ class Beneficiaire
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $handicap = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $specialite = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $statut = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $classe = null;
 
     public function getId(): ?int
     {
@@ -429,5 +447,77 @@ class Beneficiaire
     public function setCreatedAtValue(): \DateTime
     {
         return $this->createdAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
+    public function getNatureCNI(): ?string
+    {
+        return $this->natureCNI;
+    }
+
+    public function setNatureCNI(?string $natureCNI): static
+    {
+        $this->natureCNI = $natureCNI;
+
+        return $this;
+    }
+
+    public function getNumeroCNI(): ?string
+    {
+        return $this->numeroCNI;
+    }
+
+    public function setNumeroCNI(?string $numeroCNI): static
+    {
+        $this->numeroCNI = $numeroCNI;
+
+        return $this;
+    }
+
+    public function isHandicap(): ?bool
+    {
+        return $this->handicap;
+    }
+
+    public function setHandicap(?bool $handicap): static
+    {
+        $this->handicap = $handicap;
+
+        return $this;
+    }
+
+    public function getSpecialite(): ?string
+    {
+        return $this->specialite;
+    }
+
+    public function setSpecialite(?string $specialite): static
+    {
+        $this->specialite = $specialite;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(?string $statut): static
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getClasse(): ?string
+    {
+        return $this->classe;
+    }
+
+    public function setClasse(?string $classe): static
+    {
+        $this->classe = $classe;
+
+        return $this;
     }
 }

@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class BeneficiaireFormType extends AbstractType
 {
@@ -55,11 +57,36 @@ class BeneficiaireFormType extends AbstractType
             ])
             ->add('telephone', TextType::class,[
                 'attr' =>['class' => "form-control", 'placeholder'=>"", 'autocomplete'=>'off'],
-                'label' => "Téléphone"
+                'label' => "Téléphone",
+                'constraints' => [
+                    new NotBlank([
+                        'message' => "Veuillez entrer un numéro de téléphone"
+                    ]),
+                    new Regex([
+                        'pattern' => '/^\d{10}$/',  // 10 chiffres
+                        'message' => 'Le numéro de téléphone doit comporter exactement 10 chiffres.',
+                    ])
+                ]
             ])
             ->add('adresse', TextType::class,[
                 'attr' =>['class' => "form-control", 'placeholder'=>"", 'autocomplete'=>'off'],
-                'label' => "Adresse géographique"
+                'label' => "Lieu de résidence habituel"
+            ])
+            ->add('natureCNI', ChoiceType::class,[
+                'attr' => ['class' => 'form-control'],
+                'choices' =>[
+                    '-- Selectionnez --' => '',
+                    'CNI-ORANGE' => 'CNI-ORANGE',
+                    'CNI-VERTE' => 'CNI-VERTE',
+                    "ATTESTATION D'IDENTITE"  => "ATTESTATION D'IDENTITE",
+                    "PASSEPORT"  => "PASSEPORT",
+                    "AUTRE"  => "AUTRE",
+                ],
+                'label' => "Nature de votre carte d'identité"
+            ])
+            ->add('numeroCNI', TextType::class,[
+                'attr' => ['class' => 'form-control', 'autocomplete' => 'off' ],
+                'label' => "Nunméro de votre carte d'identité"
             ])
             ->add('media', FileType::class,[
                 'attr'=>['class'=>"dropify-fr", 'data-preview' => ".preview"],
