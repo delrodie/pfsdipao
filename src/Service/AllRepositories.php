@@ -4,12 +4,14 @@ namespace App\Service;
 
 use App\Repository\BeneficiaireRepository;
 use App\Repository\CuriculumRepository;
+use App\Repository\NiveauEtudeRepository;
 
 class AllRepositories
 {
     public function __construct(
         private BeneficiaireRepository $beneficiaireRepository,
         private CuriculumRepository $curiculumRepository,
+        private NiveauEtudeRepository $etudeRepository,
     )
     {
     }
@@ -36,5 +38,10 @@ class AllRepositories
     public function getAllBeneficiaireByStatut(string $statut)
     {
         return $this->beneficiaireRepository->findAllByCategorie($statut);
+    }
+
+    public function getOneNiveauEtude(string $slug)
+    {
+        return $this->etudeRepository->findOneBy(['slug' => $slug]);
     }
 }

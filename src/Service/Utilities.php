@@ -31,4 +31,15 @@ class Utilities
     {
         return (new AsciiSlugger())->slug(strtolower($string));
     }
+
+    // importation des fichiers Excel
+    public function importNiveau(string $title): AbstractUnicodeString|false
+    {
+        $slug = $this->slug($title);
+        $verif = $this->allRepositories->getOneNiveauEtude($slug);
+
+        if ($verif) return false;
+
+        return $slug;
+    }
 }
