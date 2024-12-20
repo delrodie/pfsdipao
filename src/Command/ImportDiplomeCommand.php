@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Entity\NiveauEtude;
+use App\Entity\Diplome;
 use App\Service\Utilities;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -16,10 +16,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:import-niveau-etude',
-        description: "Importation du fichier Excel Niveau d'étude dans la base de données.",
+    name: 'app:import-diplome',
+    description: 'Importation du fichier Diplome dans la base de données',
 )]
-class ImportNiveauEtudeCommand extends Command
+class ImportDiplomeCommand extends Command
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
@@ -44,12 +44,11 @@ class ImportNiveauEtudeCommand extends Command
         $progressBar->start();
 
         // Chemin vers le fichier Excel
-        if (!file_exists(dirname(__DIR__).'/../doc/niveau.xlsx')){
-            $io->error("Echec, le fichier Excel niveau.xlsx n'existe pas.");
+        $filePath = dirname(__DIR__).'/../doc/diplome.xlsx';
+        if (!file_exists($filePath)){
+            $io->error("Echec! le fichier Excel diplome.xlsx n'existe pas dans le repertoire doc");
             return Command::FAILURE;
         }
-
-        $filePath = dirname(__DIR__).'/../doc/niveau.xlsx';
 
         try{
             // Lecture du fichier Excel
@@ -63,13 +62,13 @@ class ImportNiveauEtudeCommand extends Command
                 if ($index === 0) continue;
 
                 $titre = $row[0];
-                $slug = $this->utilities->importExcel($titre, 'niveauEtude');
+                $slug = $this->utilities->importExcel($titre, 'diplome');
                 if ($slug){
-                    $niveauEtude = new NiveauEtude();
-                    $niveauEtude->setTitre($titre);
-                    $niveauEtude->setSlug($slug);
+                    $diplome = new Diplome();
+                    $diplome->setTitre($titre);
+                    $diplome->setSlug($slug);
 
-                    $this->entityManager->persist($niveauEtude);
+                    $this->entityManager->persist($diplome);
                     $nb++;
                     $progressBar->advance();
                 }
@@ -79,9 +78,9 @@ class ImportNiveauEtudeCommand extends Command
             $this->entityManager->flush();
             $progressBar->finish();
 
-            $message = $nb === 0 ? "Aucun niveau d'étude n'a été importé." :
-                ($nb === 1 ? "{$nb} niveau d'étude a été importé avec succès dans la base de données" :
-                    "{$nb} niveaux d'étude ont été importés avec succès dans la base de données");
+            $message = $nb === 0 ? "Aucun diplôme n'a été importé." :
+                ($nb === 1 ? "{$nb} diplôme a été importé avec succès dans la base de données" :
+                "{$nb} diplômes ont été importés avec succès dans la base de données");
 
             $io->success($message);
 
@@ -91,6 +90,5 @@ class ImportNiveauEtudeCommand extends Command
             $io->error("Erreur lors de l'importation: {$e->getMessage()} ");
             return Command::FAILURE;
         }
-
     }
 }

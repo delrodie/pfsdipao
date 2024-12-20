@@ -42,4 +42,18 @@ class Utilities
 
         return $slug;
     }
+
+    public function importExcel(string $title, string $entityName): AbstractUnicodeString|false
+    {
+        $slug = $this->slug($title);
+
+        $entity = match ($entityName){
+            'diplome' => $this->allRepositories->getOneDiplome($slug),
+            default => $this->allRepositories->getOneNiveauEtude($slug)
+        };
+
+        if ($entity) return false;
+
+        return $slug;
+    }
 }

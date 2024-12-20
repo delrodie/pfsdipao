@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Repository\BeneficiaireRepository;
 use App\Repository\CuriculumRepository;
+use App\Repository\DiplomeRepository;
 use App\Repository\NiveauEtudeRepository;
 
 class AllRepositories
@@ -12,6 +13,7 @@ class AllRepositories
         private BeneficiaireRepository $beneficiaireRepository,
         private CuriculumRepository $curiculumRepository,
         private NiveauEtudeRepository $etudeRepository,
+        private readonly DiplomeRepository $diplomeRepository,
     )
     {
     }
@@ -43,5 +45,10 @@ class AllRepositories
     public function getOneNiveauEtude(string $slug)
     {
         return $this->etudeRepository->findOneBy(['slug' => $slug]);
+    }
+
+    public function getOneDiplome(string $slug)
+    {
+        return $this->diplomeRepository->findOneBy(['slug' => $slug]);
     }
 }
