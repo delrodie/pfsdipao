@@ -14,8 +14,9 @@
         <div class="col-md-6 col-lg-2 mt-3">{{form_row(form.sexe)}}</div>
         <div class="col-md-6 col-lg-4 mt-3">{{form_row(form.nationalite)}}</div>
         <div class="col-md-6 col-lg-6 mt-3">{{form_row(form.region)}}</div>
-        <div class="col-md-6 col-lg-6 mt-3">{{form_row(form.natureCNI)}}</div>
-        <div class="col-md-6 col-lg-6 mt-3">{{form_row(form.numeroCNI)}}</div>
+        <div class="col-md-6 col-lg-4 mt-3">{{form_row(form.natureCNI)}}</div>
+        <div class="col-md-6 col-lg-4 mt-3">{{form_row(form.numeroCNI)}}</div>
+        <div class="col-md-6 col-lg-4 mt-3">{{form_row(form.handicap)}}</div>
         <div class="col-md-6 col-lg-4 mt-2">{{form_row(form.telephone)}}</div>
         <div class="col-md-6 col-lg-8 mt-2">{{form_row(form.adresse)}}</div>
     </div>
@@ -40,8 +41,9 @@
     <legend class="reset">Situation professionnelle</legend>
 
     <div class="row block">
-        <div class="col-md-6 mt-3">{{form_row(form.analphabete)}}</div>
-        <div class="col-md-6 mt-3">
+        <div class="col-md-5 mt-3">{{form_row(form.specialite)}}</div>
+        <div class="col-md-3 mt-3">{{form_row(form.analphabete)}}</div>
+        <div class="col-md-4 mt-3">
             <label for="formation">Formation</label>
             <select name="formation" id="formation" class="form-select">
                 <option value="">-- Sélectionnez --</option>

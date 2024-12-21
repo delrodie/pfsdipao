@@ -53,6 +53,8 @@ class BeneficiaireController extends AbstractController
             ));
 
             $beneficiaire->setUser($this->getUser());
+            $beneficiaire->setClasse($this->getUser()->getStatut());
+//            dd($beneficiaire);
 
             $this->entityManager->persist($beneficiaire);
             $this->entityManager->flush();

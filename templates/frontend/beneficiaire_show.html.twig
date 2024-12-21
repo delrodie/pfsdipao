@@ -12,17 +12,21 @@
                         <legend class="reset">Identité & adresse</legend>
                         <div class="row block">
                             <div class="col-md-4 col-lg-4 mt-3">
-                                <img src="{{ absolute_url(asset('upload/profile/' ~ beneficiaire.media)) }}" alt="{{ beneficiaire.nom }}" class="img-fluid avatar">
+                                <img src="{{ absolute_url(asset(beneficiaire.media ? 'upload/profile/' ~ beneficiaire.media : 'assets/img/user4.png' )) }}" alt="{{ beneficiaire.nom }}" class="img-fluid avatar">
                             </div>
                             <div class="col-md-8 col-lg-8">
                                 <div class="row form-group">
-                                    <div class="col-12 mt-3">
+                                    <div class="col-5 mt-3">
+                                        <label for="nom">Matricule</label>
+                                        <input type="text" class="form-control" value="{{ beneficiaire.matricule }}" style="color: darkred; font-weight:bold;" disabled>
+                                    </div>
+                                    <div class="col-7 mt-3">
                                         <label for="nom">Nom de famille</label>
-                                        <input type="text" class="form-control" value="{{ beneficiaire.nom }}" disabled>
+                                        <input type="text" class="form-control" value="{{ beneficiaire.nom|upper }}" disabled>
                                     </div>
                                     <div class="col-12 mt-2">
                                         <label for="prenoms">Prenoms</label>
-                                        <input type="text" class="form-control" value="{{ beneficiaire.prenom }}" disabled>
+                                        <input type="text" class="form-control" value="{{ beneficiaire.prenom|upper }}" disabled>
                                     </div>
                                     <div class="col-lg-4 mt-2">
                                         <label for="dateNaissance">Date de naissance</label>
@@ -30,7 +34,7 @@
                                     </div>
                                     <div class="col-lg-8 mt-2">
                                         <label for="lieuNaissance">Lieu de naissance</label>
-                                        <input type="text" class="form-control" value="{{ beneficiaire.lieuNaissance }}" disabled>
+                                        <input type="text" class="form-control" value="{{ beneficiaire.lieuNaissance|upper }}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -40,11 +44,23 @@
                             </div>
                             <div class="col-md-6 col-lg-4 mt-3">
                                 <label for="nationalite">Nationalité</label>
-                                <input type="text" class="form-control" value="{{ beneficiaire.nationalite }}" disabled>
+                                <input type="text" class="form-control" value="{{ beneficiaire.nationalite|upper }}" disabled>
                             </div>
                             <div class="col-md-6 col-lg-6 mt-3">
                                 <label for="region">Région d'origine</label>
-                                <input type="text" class="form-control" value="{{ beneficiaire.region }}" disabled>
+                                <input type="text" class="form-control" value="{{ beneficiaire.region|upper }}" disabled>
+                            </div>
+                            <div class="col-md-6 col-lg-4 mt-3">
+                                <label for="">Nature Pièce d'identité</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.natureCNI }}" disabled>
+                            </div>
+                            <div class="col-md-6 col-lg-4 mt-3">
+                                <label for="">Numéro Pièce d'identité</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.numeroCNI|upper }}" disabled>
+                            </div>
+                            <div class="col-md-6 col-lg-4 mt-3">
+                                <label for="">Handicap</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.handicap ? 'OUI' : 'NON' }}" disabled>
                             </div>
                             <div class="col-md-6 col-lg-4 mt-2">
                                 <label for="telephone">Telephone</label>
@@ -52,7 +68,7 @@
                             </div>
                             <div class="col-md-6 col-lg-8 mt-2">
                                 <label for="adresse">Adresse</label>
-                                <input type="text" class="form-control" value="{{ beneficiaire.adresse }}" disabled>
+                                <input type="text" class="form-control" value="{{ beneficiaire.adresse|upper }}" disabled>
                             </div>
                         </div>
                     </fieldset>
@@ -83,7 +99,7 @@
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label for="tuteur">Nom & prenoms de la PS</label>
-                                <input type="text" class="form-control" value="{{ beneficiaire.nomRessource }}" disabled>
+                                <input type="text" class="form-control" value="{{ beneficiaire.nomRessource|upper }}" disabled>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="telephone">Telephone de la PS</label>
@@ -91,7 +107,7 @@
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="adresse">Adresse de la PS</label>
-                                <input type="text" class="form-control" value="{{ beneficiaire.adresseRessource }}" disabled>
+                                <input type="text" class="form-control" value="{{ beneficiaire.adresseRessource|upper }}" disabled>
                             </div>
                         </div>
                     </fieldset>
@@ -100,17 +116,21 @@
                         <legend class="reset">Formation</legend>
 
                         <div class="row block">
-                            <div class="col-md-4 mt-3">
+                            <div class="col-md-6 mt-3">
+                                <label for="analphabete">Spécialité</label>
+                                <input type="text" class="form-control" value="{{ beneficiaire.specialite.titre}}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-3">
                                 <label for="analphabete">Analphabete</label>
                                 <input type="text" class="form-control" value="{{ beneficiaire.analphabete ? 'OUI' : 'NON' }}" disabled>
                             </div>
-                            <div class="col-md-4 mt-3">
+                            <div class="col-md-6 mt-3">
                                 <label for="niveau">Niveau d'étude</label>
-                                <input type="text" class="form-control" value="{{ beneficiaire.niveauEtude }}" disabled>
+                                <input type="text" class="form-control" value="{{ beneficiaire.niveauEtude.titre ?? ""}}" disabled>
                             </div>
-                            <div class="col-md-4 mt-3">
+                            <div class="col-md-6 mt-3">
                                 <label for="diplome">Diplôme</label>
-                                <input type="text" class="form-control" value="{{ beneficiaire.diplome }}" disabled>
+                                <input type="text" class="form-control" value="{{ beneficiaire.diplome.titre ??"" }}" disabled>
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label for="formation">Niveau formation professionnelle</label>
@@ -118,7 +138,7 @@
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label for="nature">Nature formation professionnelle</label>
-                                <input type="text" class="form-control" value="{{ beneficiaire.natureFormation }}" disabled>
+                                <input type="text" class="form-control" value="{{ beneficiaire.natureFormation.titre ?? '' }}" disabled>
                             </div>
                         </div>
                     </fieldset>

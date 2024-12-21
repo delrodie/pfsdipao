@@ -6,6 +6,7 @@ use App\Entity\Beneficiaire;
 use App\Entity\Diplome;
 use App\Entity\FormationProfessionnelle;
 use App\Entity\NiveauEtude;
+use App\Entity\Specialite;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -50,6 +51,15 @@ class BeneficiaireFormType extends AbstractType
                     'Femme' => "FEMME"
                 ],
                 'label' => "Sexe *"
+            ])
+            ->add('handicap', ChoiceType::class,[
+                'attr' => ['class' => "form-select"],
+                'choices' => [
+                    '-- Selectionnez --' => "",
+                    'Handicapé(e)' => true,
+                    'Non handicapé(e)' => false
+                ],
+                'label' => "Situation d'handicap *"
             ])
             ->add('nationalite', TextType::class,[
                 'attr' =>['class' => "form-control", 'placeholder'=>"", 'autocomplete'=>'off'],
@@ -173,7 +183,7 @@ class BeneficiaireFormType extends AbstractType
             ])
             ->add('adresseRessource', TextType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
-                'label' => "Adresse de la personne ressource *"
+                'label' => "Lieu de résidence de la personne ressource *"
             ])
             ->add('analphabete', ChoiceType::class,[
                 'attr' => ['class' => 'form-control'],
@@ -182,7 +192,7 @@ class BeneficiaireFormType extends AbstractType
                     'OUI' => 1,
                     'NON' => 0
                 ],
-                'label' => "Analphabète"
+                'label' => "Analphabète *"
             ])
             ->add('niveauEtude', EntityType::class,[
                 'attr'=>['class' => "form-select ", 'autocomplete'=>"off"],
@@ -201,10 +211,16 @@ class BeneficiaireFormType extends AbstractType
                 'required' => false
             ])
             ->add('natureFormation', EntityType::class,[
-                'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
+                'attr'=>['class' => "form-select", 'autocomplete'=>"off"],
                 'label' => "Nature de formation professionnelle",
                 'required' => false,
                 'class' => FormationProfessionnelle::class,
+                'choice_label' => 'titre'
+            ])
+            ->add('specialite', EntityType::class,[
+                'attr'=>['class' => "form-select", 'autocomplete'=>"off"],
+                'label' => "Spécialité *",
+                'class' => Specialite::class,
                 'choice_label' => 'titre'
             ])
 //            ->add('slug')

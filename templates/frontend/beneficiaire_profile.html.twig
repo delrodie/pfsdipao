@@ -86,39 +86,65 @@
         });
     </script>
     <script>
-        const analfabeteRadio = document.getElementById('beneficiaire_form_analphabete');
-        const ouiRadio = document.getElementById('oui');
-        const formationFieldset = document.getElementById('fieldsetFormation');
-        const formationSelect = document.getElementById('formation');
-        const generaleFields = document.getElementById('generaleFields');
-        const professionnelleFields = document.getElementById('professionnelleFields');
+        document.addEventListener('DOMContentLoaded', function () {
+            const analphabeteField = document.getElementById('beneficiaire_form_analphabete');
+            const niveauEtudeField = document.getElementById('beneficiaire_form_niveauEtude');
+            const diplomeField = document.getElementById('beneficiaire_form_diplome');
+            const niveauFormationField = document.getElementById('beneficiaire_form_niveauFormation');
+            const natureFormationField = document.getElementById('beneficiaire_form_natureFormation');
+            const formationSelect = document.getElementById('formation');
 
-        // Désactiver tous les champs sauf "analfabète" au début
-        document.querySelectorAll('input[name="situation"]').forEach(input => {
-            input.addEventListener('change', (e) => {
-                if (ouiRadio.checked) {
-                    formationFieldset.disabled = false;
-                } else {
-                    formationFieldset.disabled = true;
-                    formationSelect.value = "";
-                    generaleFields.style.display = "none";
-                    professionnelleFields.style.display = "none";
-                }
-            });
-        });
-
-        // Activation des champs en fonction de la sélection de formation
-        formationSelect.addEventListener('change', (e) => {
-            if (formationSelect.value === 'generale') {
-                generaleFields.style.display = "block";
-                professionnelleFields.style.display = "none";
-            } else if (formationSelect.value === 'professionnelle') {
-                generaleFields.style.display = "none";
-                professionnelleFields.style.display = "block";
-            } else {
-                generaleFields.style.display = "none";
-                professionnelleFields.style.display = "none";
+            function resetFields() {
+                niveauEtudeField.value = ""; // Réinitialiser le champ niveauEtude
+                diplomeField.value = ""; // Réinitialiser le champ diplome
+                niveauFormationField.value = ""; // Réinitialiser le champ niveauFormation
+                natureFormationField.value = ""; // Réinitialiser le champ natureFormation
+                formationSelect.value = ""; // Réinitialiser le champ formation
             }
+
+            function resetGenerale() {
+                niveauEtudeField.value = ""; // Réinitialiser le champ niveauEtude
+                diplomeField.value = ""; // Réinitialiser le champ diplome
+            }
+
+            function resetProfessionnelle() {
+                niveauFormationField.value = ""; // Réinitialiser le champ niveauFormation
+                natureFormationField.value = ""; // Réinitialiser le champ natureFormation
+            }
+
+            function updateFieldset() {
+                const isAnalphabete = analphabeteField.value === "1";
+
+                // Désactiver tous les champs
+                formationSelect.disabled = true;
+                niveauEtudeField.disabled = true;
+                diplomeField.disabled = true;
+                niveauFormationField.disabled = true;
+                natureFormationField.disabled = true;
+
+                if (isAnalphabete) {
+                    resetFields(); // Réinitialiser les champs si analphabète est sélectionné
+                } else {
+                    formationSelect.disabled = false;
+                    const formationType = document.querySelector('select[name="formation"]');
+                    if (formationType && formationSelect.value === 'GENERALE') {
+                        niveauEtudeField.disabled = false;
+                        diplomeField.disabled = false;
+                        resetProfessionnelle();
+                    } else if (formationType && formationSelect.value === 'PROFESSIONNELLE') {
+                        niveauFormationField.disabled = false;
+                        natureFormationField.disabled = false;
+                        resetGenerale();
+                    }
+                }
+            }
+
+            analphabeteField.addEventListener('change', updateFieldset);
+            formationSelect.addEventListener('change', updateFieldset);
+
+            // Initial call
+            updateFieldset();
         });
     </script>
+
 {% endblock %}
