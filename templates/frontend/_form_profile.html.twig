@@ -37,10 +37,18 @@
 </fieldset>
 
 <fieldset class="reset mt-5">
-    <legend class="reset">Formation</legend>
+    <legend class="reset">Situation professionnelle</legend>
 
     <div class="row block">
-        <div class="col-md-4 mt-3">{{form_row(form.analphabete)}}</div>
+        <div class="col-md-6 mt-3">{{form_row(form.analphabete)}}</div>
+        <div class="col-md-6 mt-3">
+            <label for="formation">Formation professionnelle</label>
+            <select name="formation" id="formation" class="form-select">
+                <option value="">-- Sélectionnez --</option>
+                <option value="GENERALE">Formation académique générale</option>
+                <option value="PROFESSIONNELLE">Formation professionnelle</option>
+            </select>
+        </div>
         <div class="col-md-4 mt-3">{{form_row(form.niveauEtude)}}</div>
         <div class="col-md-4 mt-3">{{form_row(form.diplome)}}</div>
         <div class="col-md-6 mt-3">{{form_row(form.niveauFormation)}}</div>

@@ -81,11 +81,11 @@ class Beneficiaire
     #[ORM\Column(nullable: true)]
     private ?bool $analphabete = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $niveauEtude = null;
+    #[ORM\ManyToOne]
+    private ?NiveauEtude $niveauEtude = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $diplome = null;
+    #[ORM\ManyToOne]
+    private ?Diplome $diplome = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $niveauFormation = null;
@@ -105,14 +105,15 @@ class Beneficiaire
     #[ORM\Column(nullable: true)]
     private ?bool $handicap = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $specialite = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $statut = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $classe = null;
+
+    #[ORM\ManyToOne]
+    private ?Specialite $specialite = null;
 
     public function getId(): ?int
     {
@@ -359,24 +360,24 @@ class Beneficiaire
         return $this;
     }
 
-    public function getNiveauEtude(): ?string
+    public function getNiveauEtude(): ?NiveauEtude
     {
         return $this->niveauEtude;
     }
 
-    public function setNiveauEtude(?string $niveauEtude): static
+    public function setNiveauEtude(?NiveauEtude $niveauEtude): static
     {
         $this->niveauEtude = $niveauEtude;
 
         return $this;
     }
 
-    public function getDiplome(): ?string
+    public function getDiplome(): ?Diplome
     {
         return $this->diplome;
     }
 
-    public function setDiplome(?string $diplome): static
+    public function setDiplome(?Diplome $diplome): static
     {
         $this->diplome = $diplome;
 
@@ -485,17 +486,7 @@ class Beneficiaire
         return $this;
     }
 
-    public function getSpecialite(): ?string
-    {
-        return $this->specialite;
-    }
-
-    public function setSpecialite(?string $specialite): static
-    {
-        $this->specialite = $specialite;
-
-        return $this;
-    }
+    
 
     public function getStatut(): ?string
     {
@@ -517,6 +508,18 @@ class Beneficiaire
     public function setClasse(?string $classe): static
     {
         $this->classe = $classe;
+
+        return $this;
+    }
+
+    public function getSpecialite(): ?Specialite
+    {
+        return $this->specialite;
+    }
+
+    public function setSpecialite(?Specialite $specialite): static
+    {
+        $this->specialite = $specialite;
 
         return $this;
     }

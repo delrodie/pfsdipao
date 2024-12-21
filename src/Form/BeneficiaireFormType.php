@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Beneficiaire;
+use App\Entity\Diplome;
+use App\Entity\NiveauEtude;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -24,20 +26,20 @@ class BeneficiaireFormType extends AbstractType
 //            ->add('matricule')
             ->add('nom', TextType::class,[
                 'attr' => ['class' => 'form-control', 'placeholder'=>"", 'autocomplete'=>"off"],
-                'label' => "Nom de famille"
+                'label' => "Nom de famille *"
             ])
             ->add('prenom', TextType::class,[
                 'attr' => ['class' => 'form-control', 'placeholder'=>"", 'autocomplete'=>"off"],
-                'label' => "Prenoms"
+                'label' => "Prenoms *"
             ])
             ->add('dateNaissance', null, [
                 'widget' => 'single_text',
                 'attr' => ['class' => 'form-control'],
-                'label' => "Date de naissance"
+                'label' => "Date de naissance *"
             ])
             ->add('lieuNaissance', TextType::class,[
                 'attr' =>['class' => "form-control", 'placeholder'=>"", 'autocomplete'=>'off'],
-                'label' => "Lieu de naissance"
+                'label' => "Lieu de naissance *"
             ])
             ->add('sexe', ChoiceType::class,[
                 'attr' => ['class' => "form-select"],
@@ -45,19 +47,21 @@ class BeneficiaireFormType extends AbstractType
                     '-- Selectionnez --' => "",
                     'Homme' => "HOMME",
                     'Femme' => "FEMME"
-                ]
+                ],
+                'label' => "Sexe *"
             ])
             ->add('nationalite', TextType::class,[
                 'attr' =>['class' => "form-control", 'placeholder'=>"", 'autocomplete'=>'off'],
-                'label' => "Nationalité"
+                'label' => "Nationalité *",
             ])
             ->add('region', TextType::class,[
                 'attr' =>['class' => "form-control", 'placeholder'=>"", 'autocomplete'=>'off'],
-                'label' => "Région d'origine"
+                'label' => "Région d'origine",
+                'required' => false
             ])
             ->add('telephone', TextType::class,[
                 'attr' =>['class' => "form-control", 'placeholder'=>"", 'autocomplete'=>'off'],
-                'label' => "Téléphone",
+                'label' => "Téléphone *",
                 'constraints' => [
                     new NotBlank([
                         'message' => "Veuillez entrer un numéro de téléphone"
@@ -70,7 +74,7 @@ class BeneficiaireFormType extends AbstractType
             ])
             ->add('adresse', TextType::class,[
                 'attr' =>['class' => "form-control", 'placeholder'=>"", 'autocomplete'=>'off'],
-                'label' => "Lieu de résidence habituel"
+                'label' => "Lieu de résidence habituel *"
             ])
             ->add('natureCNI', ChoiceType::class,[
                 'attr' => ['class' => 'form-control'],
@@ -82,11 +86,11 @@ class BeneficiaireFormType extends AbstractType
                     "PASSEPORT"  => "PASSEPORT",
                     "AUTRE"  => "AUTRE",
                 ],
-                'label' => "Nature de votre carte d'identité"
+                'label' => "Nature de votre carte d'identité *"
             ])
             ->add('numeroCNI', TextType::class,[
                 'attr' => ['class' => 'form-control', 'autocomplete' => 'off' ],
-                'label' => "Nunméro de votre carte d'identité"
+                'label' => "Nunméro de votre carte d'identité *"
             ])
             ->add('media', FileType::class,[
                 'attr'=>['class'=>"dropify-fr", 'data-preview' => ".preview"],
@@ -111,11 +115,13 @@ class BeneficiaireFormType extends AbstractType
             ])
             ->add('enfantFamille', IntegerType::class,[
                 'attr' =>['class' => "form-control", 'autocomplete'=>'off'],
-                'label'=> "Nombre d'enfants dans la famille"
+                'label'=> "Nombre d'enfants dans la famille",
+                'required' => false
             ])
             ->add('enfantCharge', IntegerType::class,[
                 'attr' =>['class' => "form-control", 'autocomplete'=>'off'],
-                'label'=> "Nombre d'enfants à charge"
+                'label'=> "Nombre d'enfants à charge",
+                'required' => false
             ])
             ->add('matrimoniale', ChoiceType::class,[
                 'attr' => ['class' => 'form-select'],
@@ -127,7 +133,7 @@ class BeneficiaireFormType extends AbstractType
                     "Divorcé(e)" => "DIVORCE(E)",
                     "Veuf(ve)" => "VEUF(VE)"
                 ],
-                'label' => "Situation matrimoniale"
+                'label' => "Situation matrimoniale *"
             ])
             ->add('hebergement', ChoiceType::class,[
                 'attr' => ['class' => 'form-select'],
@@ -136,9 +142,9 @@ class BeneficiaireFormType extends AbstractType
                     " Chez moi" => "CHEZ MOI",
                     "Chez mes parents" => "CHEZ MES PARENTS",
                     "Chez mes amis" => "CHEZ MES AMIS",
-                    "AUTRE" => "AUTRES"
+                    "Autre" => "AUTRES"
                 ],
-                'label' => "Hebergement"
+                'label' => "Hebergement *"
             ])
             ->add('typeRessource', ChoiceType::class,[
                 'attr' => ['class' => 'form-select'],
@@ -146,50 +152,47 @@ class BeneficiaireFormType extends AbstractType
                     "-- Selectionnez --" => "",
                     "Père" => "PERE",
                     "Mère" => "MERE",
+                    "Soeur" => "SOEUR",
+                    "Frère" => "FRERE",
+                    "Cousin(e)" => "COUSIN(E)",
+                    "Oncle/tante" => "ONCLE/TANTE",
+                    "Ami" => "AMI",
                     'Tuteur/tutrice' => "TUTEUR/TUTRICE",
                     'Conjoint(e)' => "CONJOINT(E)"
                 ],
-                'label' => "Personne ressource"
+                'label' => "Personne ressource (Urgence) *"
             ])
             ->add('nomRessource', TextType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
-                'label' => "Nom & prenoms de la personne ressource"
+                'label' => "Nom & prenoms de la personne ressource *"
             ])
             ->add('telephoneRessource', TextType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
-                'label' => "Téléphone de la personne ressource"
+                'label' => "Téléphone de la personne ressource *"
             ])
             ->add('adresseRessource', TextType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
-                'label' => "Adresse de la personne ressource"
+                'label' => "Adresse de la personne ressource *"
             ])
             ->add('analphabete', ChoiceType::class,[
                 'attr' => ['class' => 'form-control'],
                 'choices' =>[
+                    '-- Selectionnez --' => '',
                     'OUI' => 1,
                     'NON' => 0
                 ],
                 'label' => "Analphabète"
             ])
-            ->add('niveauEtude', TextType::class,[
-                'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
-                'label' => "Niveau d'étude"
+            ->add('niveauEtude', EntityType::class,[
+                'attr'=>['class' => "form-select ", 'autocomplete'=>"off"],
+                'label' => "Niveau d'étude",
+                'class' => NiveauEtude::class,
+                'choice_label' => 'titre'
             ])
-            ->add('diplome', ChoiceType::class,[
-                'attr' => ['class' => 'form-control'],
-                'choices' =>[
-                    ' -- Selectionnez --' => "",
-                    'CEPE' => "CEPE",
-                    'BEPC' => 'BEPC',
-                    'CAP' => 'CAP',
-                    'BAC' => "BAC",
-                    'BT' => "BT",
-                    'BTS' => 'BTS',
-                    'Licence' => 'LICENCE',
-                    'Ingénieur' => "INGENIEUR",
-                    'Maitrise' => "MAITRISE",
-                    'Autre' => "AUTRE"
-                ]
+            ->add('diplome', EntityType::class,[
+                'attr' => ['class' => 'form-select'],
+                'class' => Diplome::class,
+                'choice_label' => 'titre'
             ])
             ->add('niveauFormation', TextType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
