@@ -85,4 +85,40 @@
             initializeComponents();
         });
     </script>
+    <script>
+        const analfabeteRadio = document.getElementById('beneficiaire_form_analphabete');
+        const ouiRadio = document.getElementById('oui');
+        const formationFieldset = document.getElementById('fieldsetFormation');
+        const formationSelect = document.getElementById('formation');
+        const generaleFields = document.getElementById('generaleFields');
+        const professionnelleFields = document.getElementById('professionnelleFields');
+
+        // Désactiver tous les champs sauf "analfabète" au début
+        document.querySelectorAll('input[name="situation"]').forEach(input => {
+            input.addEventListener('change', (e) => {
+                if (ouiRadio.checked) {
+                    formationFieldset.disabled = false;
+                } else {
+                    formationFieldset.disabled = true;
+                    formationSelect.value = "";
+                    generaleFields.style.display = "none";
+                    professionnelleFields.style.display = "none";
+                }
+            });
+        });
+
+        // Activation des champs en fonction de la sélection de formation
+        formationSelect.addEventListener('change', (e) => {
+            if (formationSelect.value === 'generale') {
+                generaleFields.style.display = "block";
+                professionnelleFields.style.display = "none";
+            } else if (formationSelect.value === 'professionnelle') {
+                generaleFields.style.display = "none";
+                professionnelleFields.style.display = "block";
+            } else {
+                generaleFields.style.display = "none";
+                professionnelleFields.style.display = "none";
+            }
+        });
+    </script>
 {% endblock %}

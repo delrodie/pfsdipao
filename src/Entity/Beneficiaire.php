@@ -90,8 +90,8 @@ class Beneficiaire
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $niveauFormation = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $natureFormation = null;
+    #[ORM\ManyToOne]
+    private ?FormationProfessionnelle $natureFormation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
@@ -396,12 +396,12 @@ class Beneficiaire
         return $this;
     }
 
-    public function getNatureFormation(): ?string
+    public function getNatureFormation(): ?FormationProfessionnelle
     {
         return $this->natureFormation;
     }
 
-    public function setNatureFormation(?string $natureFormation): static
+    public function setNatureFormation(?FormationProfessionnelle $natureFormation): static
     {
         $this->natureFormation = $natureFormation;
 

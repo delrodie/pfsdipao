@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Repository\BeneficiaireRepository;
 use App\Repository\CuriculumRepository;
 use App\Repository\DiplomeRepository;
+use App\Repository\FormationProfessionnelleRepository;
 use App\Repository\NiveauEtudeRepository;
 use App\Repository\SpecialiteRepository;
 
@@ -15,7 +16,8 @@ class AllRepositories
         private CuriculumRepository $curiculumRepository,
         private NiveauEtudeRepository $etudeRepository,
         private readonly DiplomeRepository $diplomeRepository,
-        private SpecialiteRepository $specialiteRepository
+        private SpecialiteRepository $specialiteRepository,
+        private FormationProfessionnelleRepository $formationProfessionnelleRepository
     )
     {
     }
@@ -57,5 +59,10 @@ class AllRepositories
     public function getOneSpecialite(string $slug)
     {
         return $this->specialiteRepository->findOneBy(['slug' => $slug]);
+    }
+
+    public function getOneFormationProfessionelle(string $slug)
+    {
+        return $this->formationProfessionnelleRepository->findOneBy(['slug' => $slug]);
     }
 }

@@ -50,6 +50,7 @@ class Utilities
         $entity = match ($entityName){
             'diplome' => $this->allRepositories->getOneDiplome($slug),
             'specialite' => $this->allRepositories->getOneSpecialite($slug),
+            'formation' => $this->allRepositories->getOneFormationProfessionelle($slug),
             default => $this->allRepositories->getOneNiveauEtude($slug)
         };
 

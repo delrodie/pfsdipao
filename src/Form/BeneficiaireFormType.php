@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Beneficiaire;
 use App\Entity\Diplome;
+use App\Entity\FormationProfessionnelle;
 use App\Entity\NiveauEtude;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -199,10 +200,12 @@ class BeneficiaireFormType extends AbstractType
                 'label' => "Niveau de formation professionnelle",
                 'required' => false
             ])
-            ->add('natureFormation', TextType::class,[
+            ->add('natureFormation', EntityType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
                 'label' => "Nature de formation professionnelle",
-                'required' => false
+                'required' => false,
+                'class' => FormationProfessionnelle::class,
+                'choice_label' => 'titre'
             ])
 //            ->add('slug')
 //            ->add('user', EntityType::class, [
