@@ -10,12 +10,14 @@ class GestionMedia
 {
     private $mediaProfile;
     private $mediaCV;
+    private $mediaEntreprise;
     public function __construct(
-        $profileDirectory, $cvDirectory,
+        $profileDirectory, $cvDirectory, $entrepriseDirectory
     )
     {
         $this->mediaProfile = $profileDirectory;
         $this->mediaCV = $cvDirectory;
+        $this->mediaEntreprise = $entrepriseDirectory;
     }
 
     /**
@@ -57,6 +59,7 @@ class GestionMedia
         try { //dd($media);
             if ($media === 'profile') $file->move($this->mediaProfile, $newFilename);
             elseif ($media === 'cv') $file->move($this->mediaCV, $newFilename);
+            elseif ($media === 'entrepreneuriat') $file->move($this->mediaEntreprise, $newFilename);
             else $file->move($this->mediaProfile, $newFilename);
         }catch (FileException $e){
 
@@ -76,6 +79,7 @@ class GestionMedia
     {
         if ($media === 'profile') unlink($this->mediaProfile.'/'.$ancienMedia);
         elseif ($media === 'cv') unlink($this->mediaCV.'/'.$ancienMedia);
+        elseif ($media === 'entrepreneuriat') unlink($this->mediaEntreprise.'/'.$ancienMedia);
         else return false;
 
         return true;

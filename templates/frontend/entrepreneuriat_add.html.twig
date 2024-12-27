@@ -7,29 +7,8 @@
                 {% include 'frontend/beneficiaire_menu.html.twig' %}
                 <div class="col-12 col-lg-9 profile-content">
                     <h2 class="titre">Liste de mes projets</h2>
-                    <div class="row mt-5">
-                        <div class="col-12 text-end">
-                            <a href="{{ absolute_url(path('app_frontend_projet_add')) }}" class="btn btn-main btn-sm"><i class="bi bi-plus-circle"></i> Ajouter</a>
-                        </div>
-                    </div>
-                    <table class="table table-responsive mt-5">
-                        <thead>
-                        <th>#</th>
-                        <th>Intutilé</th>
-                        <th>Montant</th>
-                        <th>Statut</th>
-                        <th>Details</th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+                   {{ include('frontend/_form_entrepreneuriat.html.twig') }}
 
                 </div>
             </div>
@@ -37,7 +16,7 @@
     </section>
 {% endblock %}
 
-{% block title %}{{ parent() }} Mes projets{% endblock %}
+{% block title %}{{ parent() }} Mes entreprises{% endblock %}
 
 {% block breadcrumb %}
     <section class="bread" id="breadcrumb">
@@ -46,7 +25,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Accueil</a></li>
                     <li class="breadcrumb-item"><a href="#">Mon espace</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Mes projets</li>
+                    <li class="breadcrumb-item active" aria-current="page">Mes entreprises</li>
                 </ol>
             </nav>
         </div>
@@ -58,8 +37,13 @@
     {{ parent() }}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css">
     <style>
-        .dropify-wrapper{
-            fz6
+        label{
+            color: #5e5d5d;
+            font-style: italic;
+            font-size: .9rem;
+        }
+        .form-control{
+            font-weight: 500;
         }
     </style>
 {% endblock %}

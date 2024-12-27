@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_frontend_entrepreneuriat_delete', {'code': entrepreneuriat.code}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce projet?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entrepreneuriat.id) }}">
+    <button class="btn btn-danger btn-sm">Supprimer</button>
+</form>

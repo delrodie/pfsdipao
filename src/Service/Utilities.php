@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Entrepreneuriat;
 use Symfony\Component\String\AbstractUnicodeString;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
@@ -57,5 +58,29 @@ class Utilities
         if ($entity) return false;
 
         return $slug;
+    }
+
+    public function uniciteEntrepreneuriat(Entrepreneuriat $entrepreneuriat): bool
+    {
+        $slug = $this->slug(
+            $entrepreneuriat->getNomEntreprise().'-'.$entrepreneuriat->getIntitule()
+        );
+
+        $verification = $this->allRepositories->getOneEntrepreneuriat($slug);
+        if ($verification)return false;
+
+        $entrepreneuriat->setSlug($slug);
+
+        return true;
+    }
+
+    public function codeEntrepreneuriat(): string
+    {
+        do{
+            $code = date('ym').random_int(100,999);
+            $verif = $this->allRepositories->getOneEntrepreneuriat(null, $code);
+        }while($verif);
+
+        return $code;
     }
 }

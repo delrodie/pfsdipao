@@ -28,3 +28,4 @@ services:
         arguments:
             $profileDirectory: '%kernel.project_dir%/public/upload/profile'
             $cvDirectory: '%kernel.project_dir%/public/upload/cv'
+            $entrepriseDirectory: '%kernel.project_dir%/public/upload/entreprise'

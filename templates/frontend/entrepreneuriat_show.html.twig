@@ -1,0 +1,229 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="profile" id="profile">
+        <div class="container">
+            <div class="row">
+                {% include 'frontend/beneficiaire_menu.html.twig' %}
+                <div class="col-12 col-lg-9 profile-content">
+                    <h2 class="titre">{{ entrepreneuriat.nomEntreprise }} - {{ entrepreneuriat.intitule }}</h2>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Statut du projet</legend>
+                        <div class="row block">
+                            <div class="col-md-6 mt-2">
+                                <label for="">Numero de candidature</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.code }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Statut du dossier</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.statut }}" disabled>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <label for="">Nom du conseiller Projet</label>
+                                <input type="text" class="form-control" value="" disabled>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Description du projet</legend>
+                        <div class="row block">
+                            <div class="col-md-6 mt-2">
+                                <label for="">Intitulé du projet</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.intitule }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Nom entreprise</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.nomEntreprise }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Type d'entreprise</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.typeEntreprise }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">A quel endroit serez-vous situé?</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.adresse }}" disabled>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <label for="">Objectif (Pourquoi voulez-vous faire ce projet?)</label>
+                                <textarea class="form-control" rows="5" disabled>{{ entrepreneuriat.objectif|raw }}</textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Plan de developpement</legend>
+
+                        <div class="row block">
+                            <div class="col-md-6 mt-2">
+                                <label for="service">Quels produits / services proposez-vous?</label>
+                                <textarea class="form-control" rows="3" disabled>{{ entrepreneuriat.produitPropose|raw }}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="force">Quelles eb sont les forces?</label>
+                                <textarea name="" rows="3" class="form-control" disabled>{{ entrepreneuriat.force|raw }}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Quels sont vos produits et matière premieres?</label>
+                                <textarea name="" rows="3" class="form-control" disabled>{{ entrepreneuriat.matierePremiere|raw }}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Où allez-vous acheter vos produits et matière premieres?</label>
+                                <textarea name="" rows="3" class="form-control" disabled>{{ entrepreneuriat.lieuMatierePremiere|raw }}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Qui sont les clients actuels?</label>
+                                <textarea name="" rows="3" class="form-control" disabled>{{ entrepreneuriat.clientActuel|raw }}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Qui sont les clients futurs?</label>
+                                <textarea name="" rows="3" class="form-control" disabled>{{ entrepreneuriat.clientFutur|raw }}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Qui sont les concurrents</label>
+                                <textarea name="" rows="3" class="form-control" disabled>{{ entrepreneuriat.concurrent|raw }}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Quel est le prix de votre produit?</label>
+                                <textarea name="" rows="3" class="form-control" disabled>{{ entrepreneuriat.prixProduit|raw }}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Quel est le benefice defini par produit?</label>
+                                <textarea name="" rows="3" class="form-control" disabled>{{ entrepreneuriat.beneficeProduit|raw }}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Comment fixez-vous le prix?</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.fixeProduit }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Condition de paiement</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.modePaiement }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Comment allez-vous vendre vos produits</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.modeVente }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Comment voulez-vous faire connaitre?</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.promotion }}" disabled>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Identité de l'aval</legend>
+
+                        <div class="row block">
+                            <div class="col-md-6 mt-2">
+                                <label for="">Nom & prénoms </label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.nomAval }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Lieu de résidence</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.residenceAval }}" disabled>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <label for="">Date de naissance</label>
+                                <input type="date" class="form-control" value="{{ entrepreneuriat.dateNaissanceAval|date('d/m/Y') }}" disabled>
+                            </div>
+                            <div class="col-md-8 mt-2">
+                                <label for="">Lieu de naissance</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.lieuNaissanceAval }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Profession</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.professionAval }}" disabled>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <label for="">Contact</label>
+                                <input type="tel" class="form-control" value="{{ entrepreneuriat.telephoneAval }}" disabled>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <label for="">Email</label>
+                                <input type="email" class="form-control" value="{{ entrepreneuriat.emailAval }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-5">
+                                <label for=""> <a href="{{ absolute_url(asset('upload/entreprise/' ~ entrepreneuriat.media)) }}" target="_blank">Pièce d'idenité</a></label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="reset mt-5">
+                        <legend class="reset">Financement</legend>
+
+                        <div class="row block">
+                            <div class="col-12 mt-3">
+                                <em>- Quel montant d'argent désirez vous avoir pour commencer votre activités?</em>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Montant en chiffre</label>
+                                <input type="number" class="form-control" value="{{ entrepreneuriat.montantChiffre|number_format(0,'','.') }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Montant en lettre</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.montantLettre }}" disabled>
+                            </div>
+
+                            <div class="col-12 mt-3">
+                                <em>- Comment comptez-vous effectuer le remboursement?</em>
+
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Frequence</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.modeRemboursement }}" disabled>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Autres (précisez)</label>
+                                <input type="text" class="form-control" value="{{ entrepreneuriat.autreMode }}" disabled>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="row">
+                        <div class="col-6 text-end mt-5">
+                            {{ include('frontend/_delete_entrepreneuriat.html.twig') }}
+                        </div>
+                        <div class="col-6 mt-5">
+                            <a href="{{ absolute_url(path('app_frontend_entrepreneuriat_edit', {'code': entrepreneuriat.code}) )}}" class="btn btn-outline-secondary btn-sm">Modifier</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}{{ parent() }} {{ entrepreneuriat.nomEntreprise }} - {{ entrepreneuriat.intitule }}{% endblock %}
+
+{% block breadcrumb %}
+    <section class="bread" id="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="#">Mon espace</a></li>
+                    <li class="breadcrumb-item"><a href="{{ absolute_url(path('app_frontend_entrepreneuriat_tbord') )}}">Mes projets</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Mes entreprises</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css">
+    <style>
+        label{
+            color: #5e5d5d;
+            font-style: italic;
+            font-size: .9rem;
+        }
+        .form-control{
+            font-weight: 500;
+        }
+    </style>
+{% endblock %}

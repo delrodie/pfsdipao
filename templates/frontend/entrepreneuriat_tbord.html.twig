@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="profile" id="profile">
+        <div class="container">
+            <div class="row">
+                {% include 'frontend/beneficiaire_menu.html.twig' %}
+                <div class="col-12 col-lg-9 profile-content">
+                    <h2 class="titre">Liste de mes projets</h2>
+                    <div class="row mt-5">
+                        <div class="col-12 text-end">
+                            <a href="{{ absolute_url(path('app_frontend_entrepreneuriat_add')) }}" class="btn btn-main btn-sm"><i class="bi bi-plus-circle"></i> Ajouter</a>
+                        </div>
+                    </div>
+                    <table class="table table-responsive mt-5">
+                        <thead>
+                        <th>#</th>
+                        <th class="text-center">Codes</th>
+                        <th class="text-center">Intutilé</th>
+                        <th class="text-center">Montant</th>
+                        <th class="text-center">Statut</th>
+                        <th class="text-center">Details</th>
+                        </thead>
+                        <tbody>
+                        {% for entreprise in entrepreneuriats %}
+                            <td>{{ loop.index }}</td>
+                            <td class="text-center">{{ entreprise.code }}</td>
+                            <td>{{ entreprise.nomEntreprise }} - {{ entreprise.intitule }}</td>
+                            <td class="text-end">{{ entreprise.montantChiffre|number_format(0,'','.') }} FCFA</td>
+                            <td class="text-center">{{ entreprise.statut }}</td>
+                            <td class="text-center">
+                                <a href="{{ path('app_frontend_entrepreneuriat_show', {'code': entreprise.code}) }}"><i class="bi bi-file-text-fill"></i></a>
+                            </td>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}{{ parent() }} Mes projets{% endblock %}
+
+{% block breadcrumb %}
+    <section class="bread" id="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="#">Mon espace</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Mes projets</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css">
+    <style>
+        .dropify-wrapper{
+            fz6
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ absolute_url(asset('assets/js/jquery-3.7.1.min.js')) }}"></script>
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+    <script src="{{ absolute_url(asset('assets/js/upload-init.js')) }}"></script>
+
+    <script>
+        // Initialiser Dropify et Select2 avec Turbo
+        function initializeComponents() {
+            // Initialisation de Dropify
+            $('.dropify').dropify();
+
+            // Initialisation de Select2
+            $('.select-2').select2();
+        }
+
+        // Écouter l'événement Turbo pour initialiser les bibliothèques après le chargement de Turbo
+        document.addEventListener('turbo:load', function() {
+            initializeComponents();
+        });
+
+        // Si vous utilisez des frames Turbo, écoutez aussi cet événement
+        document.addEventListener('turbo:frame-render', function() {
+            initializeComponents();
+        });
+
+        // Pour le premier chargement de la page
+        $(document).ready(function() {
+            initializeComponents();
+        });
+    </script>
+{% endblock %}

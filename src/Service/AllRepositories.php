@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Repository\BeneficiaireRepository;
 use App\Repository\CuriculumRepository;
 use App\Repository\DiplomeRepository;
+use App\Repository\EntrepreunariatRepository;
 use App\Repository\FormationProfessionnelleRepository;
 use App\Repository\NiveauEtudeRepository;
 use App\Repository\SpecialiteRepository;
@@ -17,7 +18,8 @@ class AllRepositories
         private NiveauEtudeRepository $etudeRepository,
         private readonly DiplomeRepository $diplomeRepository,
         private SpecialiteRepository $specialiteRepository,
-        private FormationProfessionnelleRepository $formationProfessionnelleRepository
+        private FormationProfessionnelleRepository $formationProfessionnelleRepository,
+        private EntrepreunariatRepository $entrepreunariatRepository
     )
     {
     }
@@ -64,5 +66,23 @@ class AllRepositories
     public function getOneFormationProfessionelle(string $slug)
     {
         return $this->formationProfessionnelleRepository->findOneBy(['slug' => $slug]);
+    }
+
+    public function getOneEntrepreneuriat(string $slug = null, string $code = null)
+    {
+        if ($slug) {
+            return $this->entrepreunariatRepository->findOneBy(['slug' => $slug]);
+        }
+
+        if ($code){
+            return $this->entrepreunariatRepository->findOneBy(['code' => $code]);
+        }
+
+        return $this->entrepreunariatRepository->findOneBy([],['id' => 'DESC']);
+    }
+
+    public function getAllEntrepreneuriat()
+    {
+        return $this->entrepreunariatRepository->findAll();
     }
 }
