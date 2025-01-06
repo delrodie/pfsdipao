@@ -1,0 +1,253 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ parent() }} Gestion liste des postulants{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="card bg-light-info shadow-none position-relative overflow-hidden">
+            <div class="card-body px-4 py-3">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <h4 class="fw-semibold mb-8">Gestion des postulants</h4>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">Modules</a></li>
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">postulants</a></li>
+                                <li class="breadcrumb-item" aria-current="page">postulants</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-center mb-n5">
+                            <span class="head-icon"><i class="ti-package"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Profile {{ postulant.nom|upper }}</h5></div>
+                                <div class="col text-end"><a href="{{ path('app_backend_postulant_new') }}" class="btn btn-primary"><i class="ti-plus"></i> Ajouter un nouveau postulant</a></div>
+                            </div>
+
+                        </div>
+                        <div class="card-body profile">
+                            <fieldset class="reset">
+                                <legend class="reset">Identité civile</legend>
+                                <div class="row mt-4 mb-4">
+                                    <div class="col-lg-4 text-center">
+                                        <img src="{{ absolute_url(asset(postulant.media ? 'upload/profile/' ~ postulant.media : 'assets/img/user2.png'))  }}" alt="" class="img-fluid user-avatar">
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-4 mt-3">
+                                                <label for="">Matricule</label>
+                                                <input type="text" class="form-control" value="{{ postulant.matricule }}" disabled>
+                                            </div>
+                                            <div class="col-8 mt-3">
+                                                <label for="">Nom de famille</label>
+                                                <input type="text" class="form-control" value="{{ postulant.nom|upper }}" disabled>
+                                            </div>
+                                            <div class="col-12 mt-3">
+                                                <label for="">Prenoms</label>
+                                                <input type="text" class="form-control" value="{{ postulant.prenom|upper }}" disabled>
+                                            </div>
+                                            <div class="col-5 mt-3">
+                                                <label for="">Date de naissance</label>
+                                                <input type="text" class="form-control" value="{{ postulant.dateNaissance|date('d/m/Y') }}" disabled>
+                                            </div>
+                                            <div class="col-7 mt-3">
+                                                <label for="">Lieu de naissance</label>
+                                                <input type="text" class="form-control" value="{{ postulant.lieuNaissance|upper }}" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <label for="">Sexe</label>
+                                        <input type="text" class="form-control" value="{{ postulant.sexe }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <label for="">Nationalité</label>
+                                        <input type="text" class="form-control" value="{{ postulant.nationalite|upper }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <label for="">Région</label>
+                                        <input type="text" class="form-control" value="{{ postulant.region|upper }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3 mt-3">
+                                        <label for="">Nature CNI</label>
+                                        <input type="text" class="form-control" value="{{ postulant.natureCNI }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3 mt-3">
+                                        <label for="">Numero CNI</label>
+                                        <input type="text" class="form-control" value="{{ postulant.numeroCNI }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3 mt-3">
+                                        <label for="">Téléphone</label>
+                                        <input type="text" class="form-control" value="{{ postulant.telephone }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3 mt-3">
+                                        <label for="">Résidence actuelle</label>
+                                        <input type="text" class="form-control" value="{{ postulant.adresse }}" disabled>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="reset mt-5">
+                                <legend class="reset">Situation familiale</legend>
+
+                                <div class="row block">
+                                    <div class="col-md-6 mt-3">
+                                        <label for="enfant">Nombre d'enfants dans la famille</label>
+                                        <input type="number" class="form-control" value="{{ postulant.enfantFamille }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="charge">Nombre d'enfant à charge</label>
+                                        <input type="number" class="form-control" value="{{ postulant.enfantCharge }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label for="situation">Situation matrimoniale: </label>
+                                        <input type="text" class="form-control" value="{{ postulant.matrimoniale }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label for="hebergement">Hebergement</label>
+                                        <input type="text" class="form-control" value="{{ postulant.hebergement }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="type">Personne ressource (PS)</label>
+                                        <input type="text" class="form-control" value="{{ postulant.typeRessource }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="tuteur">Nom & prenoms de la PS</label>
+                                        <input type="text" class="form-control" value="{{ postulant.nomRessource|upper }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label for="telephone">Telephone de la PS</label>
+                                        <input type="text" class="form-control" value="{{ postulant.telephoneRessource }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label for="adresse">Adresse de la PS</label>
+                                        <input type="text" class="form-control" value="{{ postulant.adresseRessource|upper }}" disabled>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="reset mt-5">
+                                <legend class="reset">Formation</legend>
+
+                                <div class="row block">
+                                    <div class="col-md-6 mt-3">
+                                        <label for="analphabete">Spécialité</label>
+                                        <input type="text" class="form-control" value="{{ postulant.specialite.titre}}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="analphabete">Analphabete</label>
+                                        <input type="text" class="form-control" value="{{ postulant.analphabete ? 'OUI' : 'NON' }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="niveau">Niveau d'étude</label>
+                                        <input type="text" class="form-control" value="{{ postulant.niveauEtude.titre ?? ""}}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="diplome">Diplôme</label>
+                                        <input type="text" class="form-control" value="{{ postulant.diplome.titre ??"" }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="formation">Niveau formation professionnelle</label>
+                                        <input type="text" class="form-control" value="{{ postulant.niveauFormation }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="nature">Nature formation professionnelle</label>
+                                        <input type="text" class="form-control" value="{{ postulant.natureFormation.titre ?? '' }}" disabled>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="text-end mt-5">
+                                <a href="{{ path('app_backend_postulant_index') }}" class="btn btn-outline-secondary btn-sm">Annuler</a>
+                                <a href="#" class="btn btn-main btn-sm">Modifier</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('backoffice/vendor/css/prism.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backoffice/vendor/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/css/select2.min.css')) }}">
+    <style>
+        label{
+            color: #5e5d5d;
+            font-style: italic;
+            font-size: .9rem;
+        }
+        .form-control{
+            font-weight: 700;
+            border-radius: 0;
+        }
+        .user-avatar{
+            width: 230px;
+            height: 230px;
+            object-fit: cover;
+            border: solid 1px #ccc;
+            padding: 7px;
+        }
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('backoffice/vendor/js/prism.js') }}"></script>
+    <script src="{{ asset('backoffice/vendor/DataTables/datatables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/scroller/2.4.1/js/dataTables.scroller.js"></script>
+    <script src="https://cdn.datatables.net/scroller/2.4.1/js/scroller.bootstrap5.js"></script>
+    <script>
+        $(document).ready(function() {
+            var tableLoader = $('#table-loader');
+            var table = $('#listes');
+
+            table.on('init.dt', function() {
+                tableLoader.find('.loader').hide();
+                table.show();
+            });
+
+            table.DataTable({
+                // Configurations du DataTable
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ],
+                initComplete: function() {
+                    tableLoader.find('.loader').show();
+                    table.hide();
+                },
+                // scrollCollapse: true,
+                // scroller: true,
+                scrollX: 200
+            });
+        });
+    </script>
+    {#    <script>#}
+    {#        $('#listes').DataTable( {#}
+    {#            dom: 'Bfrtip',#}
+    {#            buttons: [#}
+    {#                'copy', 'excel', 'pdf'#}
+    {#            ]#}
+    {#        } );#}
+    {#    </script>#}
+    <script>
+        $(".select2").select2();
+    </script>
+{% endblock %}

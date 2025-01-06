@@ -83,4 +83,28 @@ class Utilities
 
         return $code;
     }
+
+    public function uniciteUser(object $postulant): false|int
+    {
+        $user = $this->allRepositories->findOneUser($postulant->getTelephone());
+        if ($user) return false;
+
+        return random_int(1000,9999);
+    }
+
+    public function unicitePostulant(object $postulant)
+    {
+        $slug = $this->slug(
+            $postulant->getNom().'-'
+            .$postulant->getPrenom().'-'
+            .$postulant->getTelephone()
+        );
+
+        $verification = $this->allRepositories->getOneBeneficiaire(null, null, $slug);
+        if ($verification){
+            return false;
+        }
+
+        return $postulant->setSlug($slug);
+    }
 }

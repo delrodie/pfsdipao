@@ -9,7 +9,7 @@
     <meta name="author" content="Delrodie AMOIKON" />
     <meta name="keywords" content="Logiciel, superette, stock, caisse" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{% block title %}CashApp :: {% endblock %}</title>
+    <title>{% block title %}PFS-Treichville :: {% endblock %}</title>
     <link rel="icon" href="{{ absolute_url(asset('assets/img/logo.png')) }}">
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/css/style.min.css')) }}">
@@ -27,6 +27,18 @@
             font-weight: bold;
             font-size: 2rem;
         }
+
+        .profile .reset {
+            all: revert;
+            padding: 10px 10px; }
+        .profile .reset legend {
+            font-size: 1rem;
+            font-weight: 500;
+            color: darkgreen; }
+        .profile fieldset.reset {
+            border: solid 1px rgba(167, 164, 164, 0.5); }
+        .profile fieldset.reset .block {
+            margin: 15px; }
     </style>
 </head>
 <body>
@@ -61,6 +73,15 @@
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">MODULES</span>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ absolute_url(path('app_backend_postulant_index')) }}" aria-expanded="false">
+                              <span>
+                                <i class="ti-user"></i>
+                              </span>
+                            <span class="hide-menu">Postulants</span>
+                        </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link has-arrow" href="#" aria-expanded="false">

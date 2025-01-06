@@ -65,7 +65,7 @@ class RegistrationFormType extends AbstractType
 
             ->add('statut', ChoiceType::class, [
                 'choices' => [
-                    'Je suis porteur de projet' => "PROJET",
+                    'Je suis porteur de projet' => "ENTREPRENEURIAT",
                     'Je cherche un emploi' => "EMPLOI",
                     'Je cherche des contrats' => "RST",
                     'Je cherche des formations' => "FORMATION",

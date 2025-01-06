@@ -9,23 +9,24 @@ use App\Repository\EntrepreunariatRepository;
 use App\Repository\FormationProfessionnelleRepository;
 use App\Repository\NiveauEtudeRepository;
 use App\Repository\SpecialiteRepository;
+use App\Repository\UserRepository;
 
 class AllRepositories
 {
     public function __construct(
-        private BeneficiaireRepository $beneficiaireRepository,
-        private CuriculumRepository $curiculumRepository,
-        private NiveauEtudeRepository $etudeRepository,
-        private readonly DiplomeRepository $diplomeRepository,
-        private SpecialiteRepository $specialiteRepository,
+        private BeneficiaireRepository             $beneficiaireRepository,
+        private CuriculumRepository                $curiculumRepository,
+        private NiveauEtudeRepository              $etudeRepository,
+        private readonly DiplomeRepository         $diplomeRepository,
+        private SpecialiteRepository               $specialiteRepository,
         private FormationProfessionnelleRepository $formationProfessionnelleRepository,
-        private EntrepreunariatRepository $entrepreunariatRepository
+        private EntrepreunariatRepository          $entrepreunariatRepository, private readonly UserRepository $userRepository
     )
     {
     }
 
     // BENEFICIAIRE
-    public function getOneBeneficiaire(string $matricule = null, object $user = null)
+    public function getOneBeneficiaire(string $matricule = null, object $user = null, string $slug = null)
     {
         if ($matricule){
             return $this->beneficiaireRepository->findOneBy(['matricule' => $matricule]);
@@ -33,6 +34,10 @@ class AllRepositories
 
         if ($user){
             return $this->beneficiaireRepository->findOneBy(['user' => $user]);
+        }
+
+        if ($slug){
+            return $this->beneficiaireRepository->findOneBy(['slug' => $slug]);
         }
 
         return $this->beneficiaireRepository->findOneBy([],['id' => 'DESC']);
@@ -84,5 +89,15 @@ class AllRepositories
     public function getAllEntrepreneuriat()
     {
         return $this->entrepreunariatRepository->findAll();
+    }
+
+    public function getAllPostulant(string $statut = null)
+    {
+        return $this->beneficiaireRepository->findPostulant($statut);
+    }
+
+    public function findOneUser($getTelephone)
+    {
+        return $this->userRepository->findOneBy(['username' => $getTelephone]);
     }
 }

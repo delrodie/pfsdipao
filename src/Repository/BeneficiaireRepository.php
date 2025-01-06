@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Beneficiaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -26,6 +27,33 @@ class BeneficiaireRepository extends ServiceEntityRepository
             ->addOrderBy('b.prenom', 'ASC')
             ->setParameter('statut', $statut)
             ->getQuery()->getResult()
+            ;
+    }
+
+    public function findPostulant(string $statut = null)
+    {
+        return $this->querySelect()
+            ->where('b.statut IS NULL OR b.statut = :statut')
+            ->orderBy('b.nom', 'ASC')
+            ->addOrderBy('b.prenom', 'ASC')
+            ->setParameter('statut', $statut)
+            ->getQuery()->getResult()
+            ;
+    }
+
+    public function querySelect(): QueryBuilder
+    {
+        return $this->createQueryBuilder('b')
+            ->addSelect('d')
+            ->addSelect('s')
+            ->addSelect('n')
+            ->addSelect('f')
+            ->addSelect('u')
+            ->leftJoin('b.diplome', 'd')
+            ->leftJoin('b.specialite', 's')
+            ->leftJoin('b.niveauEtude', 'n')
+            ->leftJoin('b.natureFormation', 'f')
+            ->leftJoin('b.user', 'u')
             ;
     }
 
@@ -53,4 +81,5 @@ class BeneficiaireRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
 }

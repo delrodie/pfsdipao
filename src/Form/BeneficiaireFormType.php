@@ -203,7 +203,8 @@ class BeneficiaireFormType extends AbstractType
             ->add('diplome', EntityType::class,[
                 'attr' => ['class' => 'form-select'],
                 'class' => Diplome::class,
-                'choice_label' => 'titre'
+                'choice_label' => 'titre',
+                'required' => true,
             ])
             ->add('niveauFormation', TextType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
@@ -221,7 +222,8 @@ class BeneficiaireFormType extends AbstractType
                 'attr'=>['class' => "form-select", 'autocomplete'=>"off"],
                 'label' => "Spécialité *",
                 'class' => Specialite::class,
-                'choice_label' => 'titre'
+                'choice_label' => 'titre',
+                'required' => true
             ])
 //            ->add('slug')
 //            ->add('user', EntityType::class, [
