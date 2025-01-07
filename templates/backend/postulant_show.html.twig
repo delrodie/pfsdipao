@@ -142,11 +142,15 @@
                                 <legend class="reset">Formation</legend>
 
                                 <div class="row block">
-                                    <div class="col-md-6 mt-3">
+                                    <div class="col-md-4 mt-3">
+                                        <label for="analphabete">Objectif</label>
+                                        <input type="text" class="form-control" value="{{ postulant.classe}}" disabled>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
                                         <label for="analphabete">Spécialité</label>
                                         <input type="text" class="form-control" value="{{ postulant.specialite.titre}}" disabled>
                                     </div>
-                                    <div class="col-md-6 mt-3">
+                                    <div class="col-md-4 mt-3">
                                         <label for="analphabete">Analphabete</label>
                                         <input type="text" class="form-control" value="{{ postulant.analphabete ? 'OUI' : 'NON' }}" disabled>
                                     </div>
@@ -165,6 +169,29 @@
                                     <div class="col-md-6 mt-3">
                                         <label for="nature">Nature formation professionnelle</label>
                                         <input type="text" class="form-control" value="{{ postulant.natureFormation.titre ?? '' }}" disabled>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="reset mt-5">
+                                <legend class="reset">Compte utilisateur</legend>
+
+                                <div class="row block">
+                                    <div class="col-md-6 mt-3">
+                                        <label for="analphabete">Login</label>
+                                        <input type="text" class="form-control" value="{{ compte ? compte.name : ''}}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="analphabete">Mot de passe</label>
+                                        <input type="text" class="form-control" value="{{ compte ? compte.word|avocat ~ compte.code : '' }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="analphabete">Nombre de connexion</label>
+                                        <input type="text" class="form-control" value="{{ user ? user.connexion : '0' }}" disabled>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label for="analphabete">Date dernière connexion</label>
+                                        <input type="text" class="form-control" value="{{ user ? user.connexion ? user.lastConnectedAt|date('Y-m-d H:i:s') : ''  }}" disabled>
                                     </div>
                                 </div>
                             </fieldset>

@@ -9,6 +9,7 @@ use App\Repository\EntrepreunariatRepository;
 use App\Repository\FormationProfessionnelleRepository;
 use App\Repository\NiveauEtudeRepository;
 use App\Repository\SpecialiteRepository;
+use App\Repository\TamponRepository;
 use App\Repository\UserRepository;
 
 class AllRepositories
@@ -20,7 +21,9 @@ class AllRepositories
         private readonly DiplomeRepository         $diplomeRepository,
         private SpecialiteRepository               $specialiteRepository,
         private FormationProfessionnelleRepository $formationProfessionnelleRepository,
-        private EntrepreunariatRepository          $entrepreunariatRepository, private readonly UserRepository $userRepository
+        private EntrepreunariatRepository          $entrepreunariatRepository,
+        private readonly UserRepository $userRepository,
+        private TamponRepository $tamponRepository
     )
     {
     }
@@ -99,5 +102,15 @@ class AllRepositories
     public function findOneUser($getTelephone)
     {
         return $this->userRepository->findOneBy(['username' => $getTelephone]);
+    }
+
+    public function getTampon(?string $getTelephone)
+    {
+        return $this->tamponRepository->findOneBy(['name' => $getTelephone]);
+    }
+
+    public function getOneUser(?string $username)
+    {
+        return $this->userRepository->findOneBy(['username' => $username]);
     }
 }

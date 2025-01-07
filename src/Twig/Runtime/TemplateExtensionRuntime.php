@@ -2,13 +2,14 @@
 
 namespace App\Twig\Runtime;
 
+use App\Service\Utilities;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class TemplateExtensionRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
-        private RequestStack $requestStack
+        private RequestStack $requestStack, private readonly Utilities $utilities
     )
     {
         // Inject dependencies if needed
@@ -19,5 +20,10 @@ class TemplateExtensionRuntime implements RuntimeExtensionInterface
         $currentRoute = $this->requestStack->getCurrentRequest()->attributes->get('_route');
 
         return $currentRoute === $value ? 'active' : '';
+    }
+
+    public function getAvocat($value): string
+    {
+        return $this->utilities->transformMot($value, true);
     }
 }

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Controller\Backend;
 
 use App\Entity\Beneficiaire;
+use App\Entity\Tampon;
 use App\Entity\User;
 use App\Form\BeneficiaireFormType;
 use App\Service\AllRepositories;
 use App\Service\GestionMedia;
+use App\Service\GestionPostulant;
 use App\Service\Utilities;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +22,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/backend/postulant')]
 class BackendPostulantController extends AbstractController
 {
-    public function __construct(private readonly AllRepositories $allRepositories, private readonly GestionMedia $gestionMedia, private readonly Utilities $utilities, private readonly UserPasswordHasherInterface $userPasswordHasher, private readonly EntityManagerInterface $entityManager)
+    public function __construct(private readonly AllRepositories $allRepositories, private readonly GestionMedia $gestionMedia, private readonly Utilities $utilities, private readonly UserPasswordHasherInterface $userPasswordHasher, private readonly EntityManagerInterface $entityManager, private readonly GestionPostulant $gestionPostulant)
     {
     }
 
@@ -40,50 +42,24 @@ class BackendPostulantController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $objecif = $request->request->get('beneficiaire_form_objectif');
-            $word = $this->utilities->uniciteUser($postulant);
-            if (!$word){
-                sweetalert()->error("Le numero de telephone est déjà utilisé dans le système", [], 'Echèx');
+
+            // Gestion des erreurs d'unicité
+            if (!$this->gestionPostulant->valideUniquePostulant($postulant)){
                 return $this->render("backend/postulant_new.html.twig",[
                     'postuant' => $postulant,
                     'form' => $form
                 ]);
             }
 
-            // Vérification de l'unicité du postulant
-            $slug = $this->utilities->unicitePostulant($postulant);
-            if (!$slug){
-                sweetalert()->error("Ce postulant a déjà été enregistré",[], "Echèc");
-                return $this->render("backend/postulant_new.html.twig",[
-                    'postulant' => $postulant,
-                    'form' => $form
-                ]);
-            }
-
-            $this->gestionMedia->media($form, $postulant, 'profile');
-            $postulant->setMatricule($this->utilities->matricule());
-            $postulant->setClasse($objecif);
-
-            // Nouvel Utilisateur
-            $user = new User();
-            $user->setUsername($postulant->getTelephone());
-            $user->setPassword(
-                $this->userPasswordHasher->hashPassword(
-                    $user, $postulant->getNom().$word
-                )
+            // Traitement des données du postulant
+            $this->gestionPostulant->processPostulantData($postulant, $request, $form);
+            sweetalert()->success(
+                "Le postulant {$postulant->getNom()} {$postulant->getPrenom()} a été ajouté avec succès!",
+                ['icon' => 'success'],
+                'Succès'
             );
-            $user->setStatut($objecif);
 
-            $postulant->setUser($user);
-
-            $this->entityManager->persist($postulant);
-            $this->entityManager->persist($user);
-
-            $this->entityManager->flush();
-
-            sweetalert()->success("Le postulant {$postulant->getNom()} {$postulant->getPrenom()} a été ajouté avec succès!", ['icon' => 'success'], 'Succès');
-
-            return $this->redirectToRoute('app_backend_postulant_show',[
+            return $this->redirectToRoute('app_backend_postulant_show', [
                 'id' => $postulant->getId()
             ]);
         }
@@ -99,7 +75,10 @@ class BackendPostulantController extends AbstractController
     {
 //        dd($beneficiaire);
         return $this->render('backend/postulant_show.html.twig',[
-            'postulant' => $beneficiaire
+            'postulant' => $beneficiaire,
+            'compte' => $this->allRepositories->getTampon($beneficiaire->getTelephone()),
+            'user' => $this->allRepositories->getOneUser($beneficiaire->getTelephone()),
         ]);
     }
+
 }

@@ -107,4 +107,50 @@ class Utilities
 
         return $postulant->setSlug($slug);
     }
+
+    public function transformMot($mot, ?bool $inverse = false): string
+    {
+        // Obtenir la correspondance appropriée (normale ou inverse)
+        $correspondances = $inverse ? $this->avocatReverse() : $this->avocat();
+
+
+        // Transformer en majuscules pour la correspondance
+        $mot = strtoupper($mot);
+
+        // Variable pour stocker le mot transformé
+        $motTransforme = '';
+
+        // Parcourir chaque lettre du mot
+        for ($i = 0, $iMax = strlen($mot); $i < $iMax; $i++) {
+            $lettre = $mot[$i];
+            $motTransforme .= $correspondances[$lettre] ?? $lettre ;
+        }
+
+        // Retourner le mot transformé
+        return strtolower($motTransforme); // Retour en minuscules si nécessaire
+    }
+
+    public function avocat(): array
+    {
+        $alphabet = range('A','Z');
+        $correspondance = [];
+
+        foreach ($alphabet as $index => $lettre) {
+            $correspondance[$lettre] = $alphabet[($index + 10) % 26];
+        }
+
+        return $correspondance;
+    }
+
+    public function avocatReverse(): array
+    {
+        $alphabet = range('A','Z');
+        $correspondance = [];
+
+        foreach ($alphabet as $index => $lettre) {
+            $correspondance[$alphabet[($index + 10) % 26]] = $lettre;
+        }
+
+        return $correspondance;
+    }
 }
