@@ -14,6 +14,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class GestionPostulant
 {
+    CONST STATUT_SELCTIONNER = 'SELECTIONNER';
+    CONST STATUT_BENEFICIAIRE = 'BENEFICIAIRE';
+    CONST STATUT_POSTULANT = 'POSTULANT';
+    CONST CLASSE_EMPLOI = 'EMPLOI';
+    CONST CLASSE_FORMATION = 'FORMATION';
+    CONST CLASSE_ENTREPRENEURIAT = 'ENTREPRENEURIAT';
+    CONST CLASSE_RST = 'RST';
+
     public function __construct(private readonly Utilities $utilities, private readonly GestionMedia $gestionMedia, private readonly EntityManagerInterface $entityManager, private readonly UserPasswordHasherInterface $userPasswordHasher)
     {
     }

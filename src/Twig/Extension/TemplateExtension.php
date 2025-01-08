@@ -17,6 +17,7 @@ class TemplateExtension extends AbstractExtension
             // Reference: https://twig.symfony.com/doc/3.x/advanced.html#automatic-escaping
             new TwigFilter('menu_active', [TemplateExtensionRuntime::class, 'getActiveClass']),
             new TwigFilter('avocat', [TemplateExtensionRuntime::class, 'getAvocat']),
+            new TwigFilter('bg_statut_beneficiaire', [TemplateExtensionRuntime::class, 'getBgStatutBeneficiaire']),
         ];
     }
 

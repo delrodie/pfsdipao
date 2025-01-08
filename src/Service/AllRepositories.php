@@ -51,9 +51,9 @@ class AllRepositories
         return $this->curiculumRepository->findOneBy(['user' => $user]);
     }
 
-    public function getAllBeneficiaireByStatut(string $statut)
+    public function getAllBeneficiaireByStatutAndClasse(string $statut = null, string $statut2 = null, string $classe = null)
     {
-        return $this->beneficiaireRepository->findAllByCategorie($statut);
+        return $this->beneficiaireRepository->findByStatutAndClasse($statut, $statut2, $classe);
     }
 
     public function getOneNiveauEtude(string $slug)

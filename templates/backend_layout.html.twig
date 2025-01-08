@@ -92,7 +92,7 @@
                         </a>
                         <ul aria-expanded="false" class="collapse first-level">
                             <li class="sidebar-item">
-                                <a href="{{ absolute_url(path('app_backend_beneficiaire_index',{'statut': 'EMPLOI'})) }}" class="sidebar-link">
+                                <a href="{{ absolute_url(path('app_backend_emploi_index')) }}" class="sidebar-link">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti-angle-right"></i>
                                     </div>
@@ -104,7 +104,23 @@
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti-angle-right"></i>
                                     </div>
-                                    <span class="hide-menu">Pour projet</span>
+                                    <span class="hide-menu">Pour entrepreneuriat</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ absolute_url(path('app_backend_beneficiaire_index',{'statut': 'PROJET'})) }}" class="sidebar-link">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti-angle-right"></i>
+                                    </div>
+                                    <span class="hide-menu">Pour formation</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ absolute_url(path('app_backend_beneficiaire_index',{'statut': 'PROJET'})) }}" class="sidebar-link">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti-angle-right"></i>
+                                    </div>
+                                    <span class="hide-menu">Pour RST</span>
                                 </a>
                             </li>
                         </ul>

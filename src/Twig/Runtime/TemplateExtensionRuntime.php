@@ -26,4 +26,13 @@ class TemplateExtensionRuntime implements RuntimeExtensionInterface
     {
         return $this->utilities->transformMot($value, true);
     }
+
+    public function getBgStatutBeneficiaire($value)
+    {
+        return match ($value) {
+            'SELECTIONNER' => 'bg-warning fw-bold',
+            'BENEFICIAIRE' => 'bg-success',
+            default => '',
+        };
+    }
 }

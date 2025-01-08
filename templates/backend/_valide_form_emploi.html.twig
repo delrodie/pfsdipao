@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('app_backend_postulant_select', {'id': postulant.id}) }}" onsubmit="return confirm('Voulez-vous vraiment selectionner ce postulant?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('select' ~ postulant.id) }}">
+    <button class="btn btn-primary">Sélectionner</button>
+    <a href="{{ path('app_backend_postulant_edit', {'id': postulant.id}) }}" class="btn btn-outline-secondary">Modifier</a>
+</form>
