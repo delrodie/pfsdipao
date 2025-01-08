@@ -153,4 +153,21 @@ class Utilities
 
         return $correspondance;
     }
+
+    public function uniciteEmploi($beneficiaire, $emploi)
+    {
+        $slug = $this->slug(
+            $emploi->getContrat().'-'
+            .$emploi->getEntreprise().'-'
+            .$emploi->getCommencement()->format('Ymd').'-'
+            .$beneficiaire->getMatricule()
+        );
+
+        if ($this->allRepositories->getOneEmploi($slug)){
+            return false;
+        }
+
+        $emploi->setSlug($slug);
+        return true;
+    }
 }

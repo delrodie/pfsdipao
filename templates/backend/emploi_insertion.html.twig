@@ -102,139 +102,14 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset class="reset mt-5">
-                                <legend class="reset">Situation familiale</legend>
 
-                                <div class="row block">
-                                    <div class="col-md-6 mt-3">
-                                        <label for="enfant">Nombre d'enfants dans la famille</label>
-                                        <input type="number" class="form-control" value="{{ postulant.enfantFamille }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="charge">Nombre d'enfant à charge</label>
-                                        <input type="number" class="form-control" value="{{ postulant.enfantCharge }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label for="situation">Situation matrimoniale: </label>
-                                        <input type="text" class="form-control" value="{{ postulant.matrimoniale }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label for="hebergement">Hebergement</label>
-                                        <input type="text" class="form-control" value="{{ postulant.hebergement }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="type">Personne ressource (PS)</label>
-                                        <input type="text" class="form-control" value="{{ postulant.typeRessource }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="tuteur">Nom & prenoms de la PS</label>
-                                        <input type="text" class="form-control" value="{{ postulant.nomRessource|upper }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label for="telephone">Telephone de la PS</label>
-                                        <input type="text" class="form-control" value="{{ postulant.telephoneRessource }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label for="adresse">Adresse de la PS</label>
-                                        <input type="text" class="form-control" value="{{ postulant.adresseRessource|upper }}" disabled>
-                                    </div>
-                                </div>
-                            </fieldset>
 
                             <fieldset class="reset mt-5">
                                 <legend class="reset">Formation</legend>
 
-                                <div class="row block">
-                                    <div class="col-md-4 mt-3">
-                                        <label for="analphabete">Objectif</label>
-                                        <input type="text" class="form-control" value="{{ postulant.classe}}" disabled>
-                                    </div>
-                                    <div class="col-md-4 mt-3">
-                                        <label for="analphabete">Spécialité</label>
-                                        <input type="text" class="form-control" value="{{ postulant.specialite.titre}}" disabled>
-                                    </div>
-                                    <div class="col-md-4 mt-3">
-                                        <label for="analphabete">Analphabete</label>
-                                        <input type="text" class="form-control" value="{{ postulant.analphabete ? 'OUI' : 'NON' }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="niveau">Niveau d'étude</label>
-                                        <input type="text" class="form-control" value="{{ postulant.niveauEtude.titre ?? ""}}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="diplome">Diplôme</label>
-                                        <input type="text" class="form-control" value="{{ postulant.diplome.titre ??"" }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="formation">Niveau formation professionnelle</label>
-                                        <input type="text" class="form-control" value="{{ postulant.niveauFormation }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="nature">Nature formation professionnelle</label>
-                                        <input type="text" class="form-control" value="{{ postulant.natureFormation.titre ?? '' }}" disabled>
-                                    </div>
-                                </div>
+                                {{ include('backend/_forrm_emploi.html.twig') }}
                             </fieldset>
 
-                            <fieldset class="reset mt-5">
-                                <legend class="reset">Compte utilisateur</legend>
-
-                                <div class="row block">
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Login</label>
-                                        <input type="text" class="form-control" value="{{ compte ? compte.name : ''}}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Mot de passe</label>
-                                        <input type="text" class="form-control" value="{{ compte ? compte.word|avocat ~ compte.code : '' }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Nombre de connexion</label>
-                                        <input type="text" class="form-control" value="{{ user ? user.connexion : '0' }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Date dernière connexion</label>
-                                        <input type="text" class="form-control" value="{{ user ? user.connexion ? user.lastConnectedAt|date('Y-m-d H:i:s') : ''  }}" disabled>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset class="reset mt-5">
-                                <legend class="reset">Liste des emplois bénéficiés</legend>
-
-                                <div class="table-responsive">
-                                    <table id="listes" class="table  border table-striped table-bordered display text-nowrap">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>CONTRATS</th>
-                                            <th>ENTREPRISES</th>
-                                            <th>SALAIRES</th>
-                                            <th>DUREE</th>
-                                            <th>DEBUT</th>
-                                            <th>ACTIONS</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for emploi in emplois %}
-                                            <tr>
-                                                <td>{{ loop.index }}</td>
-                                                <td>{{ emploi.contrat }}</td>
-                                                <td>{{ emploi.entreprise }}</td>
-                                                <td>{{ emploi.salaire }}</td>
-                                                <td>{{ emploi.duree }}</td>
-                                                <td>{{ emploi.commencement|date('Y-m-d') }}</td>
-                                                <td></td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </fieldset>
-
-                            <div class="text-center mt-5">
-                                <a href="{{ path('app_backend_emploi_insertion', {'id': postulant.id}) }}" class="btn btn-primary">Inserer dans un emploi</a>
-                            </div>
                         </div>
                     </div>
                 </div>

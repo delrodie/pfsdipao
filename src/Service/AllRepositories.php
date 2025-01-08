@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Repository\BeneficiaireRepository;
 use App\Repository\CuriculumRepository;
 use App\Repository\DiplomeRepository;
+use App\Repository\EmploiRepository;
 use App\Repository\EntrepreunariatRepository;
 use App\Repository\FormationProfessionnelleRepository;
 use App\Repository\NiveauEtudeRepository;
@@ -23,7 +24,8 @@ class AllRepositories
         private FormationProfessionnelleRepository $formationProfessionnelleRepository,
         private EntrepreunariatRepository          $entrepreunariatRepository,
         private readonly UserRepository $userRepository,
-        private TamponRepository $tamponRepository
+        private TamponRepository $tamponRepository,
+        private EmploiRepository $emploiRepository,
     )
     {
     }
@@ -112,5 +114,15 @@ class AllRepositories
     public function getOneUser(?string $username)
     {
         return $this->userRepository->findOneBy(['username' => $username]);
+    }
+
+    public function getOneEmploi(string $slug)
+    {
+        return $this->emploiRepository->findOneBy(['slug' => $slug]);
+    }
+
+    public function getAllEmploiByBeneficiaire($beneficiaire)
+    {
+        return $this->emploiRepository->findBy(['beneficiaire' => $beneficiaire], ['commencement' => 'DESC']);
     }
 }
