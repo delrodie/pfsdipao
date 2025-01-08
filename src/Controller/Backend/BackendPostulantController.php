@@ -73,12 +73,49 @@ class BackendPostulantController extends AbstractController
     #[Route('/{id}', name: 'app_backend_postulant_show', methods: ['GET'])]
     public function show(Beneficiaire $beneficiaire): Response
     {
-//        dd($beneficiaire);
         return $this->render('backend/postulant_show.html.twig',[
             'postulant' => $beneficiaire,
             'compte' => $this->allRepositories->getTampon($beneficiaire->getTelephone()),
             'user' => $this->allRepositories->getOneUser($beneficiaire->getTelephone()),
         ]);
+    }
+    #[Route('/{id}/edit', name: 'app_backend_postulant_edit', methods: ['GET','POST'])]
+    public function edit(Beneficiaire $beneficiaire, Request $request): Response
+    {
+        $form = $this->createForm(BeneficiaireFormType::class, $beneficiaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $objectif = $request->request->get('beneficiaire_form_objectif');
+            $this->gestionMedia->media($form, $beneficiaire, 'profile');
+
+            $beneficiaire->setClasse($objectif);
+
+            $this->entityManager->flush();
+
+            sweetalert()->success("Le postulant {$beneficiaire->getNom()} a été modifié avec succès!");
+
+            return $this->redirectToRoute('app_backend_postulant_show', [
+                'id' => $beneficiaire->getId()
+            ]);
+        }
+
+        return $this->render('backend/postulant_edit.html.twig',[
+            'postulant' => $beneficiaire,
+            'form' => $form
+        ]);
+    }
+
+    #[Route('/{id}/select/ok', name: 'app_backend_postulant_select', methods: ['POST'])]
+    public function select(Request $request, Beneficiaire $beneficiaire)
+    {
+        if ($this->isCsrfTokenValid('select'.$beneficiaire->getId(), $request->getPayload()->getString('_token'))) {
+//            dd($beneficiaire);
+            $beneficiaire->setStatut('SELECTIONNER');
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_backend_beneficiaire_index', [], Response::HTTP_SEE_OTHER);
     }
 
 }

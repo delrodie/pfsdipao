@@ -1,6 +1,6 @@
 {% extends 'backend_layout.html.twig' %}
 
-{% block title %}{{ parent() }} Gestion liste des postulants{% endblock %}
+{% block title %}{{ parent() }} Mise a jour du postulant {{ postulant.nom }} {{ postulant.prenom }}{% endblock %}
 
 {% block body %}
 
@@ -32,14 +32,14 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Liste des postulants</h5></div>
-                                <div class="col text-end"><a href="{{ path('app_backend_postulant_index') }}" class="btn btn-primary"><i class="ti-list"></i> &nbsp; Liste des postulants</a></div>
+                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Matricule :  <span class="badge bg-danger fw-bold" style="font-weight:bold;">{{ postulant.matricule }}</span></h5></div>
+                                <div class="col text-end"><a href="{{ path('app_backend_postulant_show', {'id': postulant.id}) }}" class="btn btn-primary"><i class="ti-user"></i> Retour au details</a></div>
                             </div>
 
                         </div>
                         <div class="card-body profile">
 
-                            {{ include('backend/_form_postulant.html.twig') }}
+                            {{ include('backend/_form_postulant.html.twig', {'button_label': 'Mettre à jour'}) }}
 
                         </div>
                     </div>
@@ -54,6 +54,24 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css">
+    <style>
+        label{
+            color: #5e5d5d;
+            font-style: italic;
+            font-size: .9rem;
+        }
+        .form-control, .form-select{
+            font-weight: 700;
+            border-radius: 0;
+        }
+        .user-avatar{
+            width: 230px;
+            height: 230px;
+            object-fit: cover;
+            border: solid 1px #ccc;
+            padding: 7px;
+        }
+    </style>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ absolute_url(asset('assets/js/jquery-3.7.1.min.js')) }}"></script>

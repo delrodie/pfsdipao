@@ -72,7 +72,10 @@
                                     {% for postulant in postulants %}
                                         <tr>
                                             <td>{{ loop.index }}</td>
-                                            <td class="">{{ postulant.matricule }}</td>
+                                            <td class="">
+                                                <a href="{{ path('app_backend_postulant_show', {'id': postulant.id}) }}">{{ postulant.matricule }}</a>
+
+                                            </td>
                                             <td class="">{{ postulant.nom|upper }}</td>
                                             <td class="">{{ postulant.prenom|upper }}</td>
                                             <td class="text-center">{{ postulant.sexe }}</td>

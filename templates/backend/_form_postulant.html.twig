@@ -1,6 +1,12 @@
 {{ form_start(form) }}
 <fieldset class="reset">
  <legend class="reset">Identité civile</legend>
+
+ <div class="row">
+  {% if postulant %}
+
+  {% endif %}
+ </div>
  <div class="row mt-4 mb-4">
   <div class="col-lg-4 text-center">{{ form_row(form.media) }}</div>
   <div class="col-lg-8">
@@ -19,6 +25,18 @@
   <div class="col-md-4 mt-3">{{ form_row(form.natureCNI) }}</div>
   <div class="col-md-4 mt-3">{{ form_row(form.numeroCNI) }}</div>
   <div class="col-md-4 mt-3">{{ form_row(form.adresse) }}</div>
+  {% if postulant.matricule %}
+   <div class="col-md-6 mt-3">
+    <label for="matricule">Matricule</label>
+    <input type="text" class="form-control" id="matricule" value="{{ postulant.matricule }}" disabled>
+   </div>
+  {% endif %}
+  {% if postulant.classe %}
+   <div class="col-md-6 mt-3">
+    <label for="classe">Objectif</label>
+    <input type="text" class="form-control" value="{{ postulant.classe }}" disabled>
+   </div>
+  {% endif %}
  </div>
 </fieldset>
 
@@ -45,7 +63,12 @@
   <div class="col-md-3 mt-3">
    <label for="beneficiaire_form_objectif">Objectif *</label>
    <select name="beneficiaire_form_objectif" id="beneficiaire_form[objectif]" class="form-select" required>
-    <option value="">-- Selectionnez --</option>
+    {% if postulant.classe %}
+     <option value="{{ postulant.classe }}">{{ postulant.classe }}</option>
+     <option value=""></option>
+     {% else %}
+      <option value="">-- Selectionnez --</option>
+    {% endif %}
     <option value="EMPLOI">Emploi</option>
     <option value="ENTREPRENEURIAT">Entrepreneuriat</option>
     <option value="FORMATION">Formation</option>
