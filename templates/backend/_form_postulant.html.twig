@@ -21,18 +21,18 @@
   <div class="col-md-4 mt-3">{{ form_row(form.natureCNI) }}</div>
   <div class="col-md-4 mt-3">{{ form_row(form.numeroCNI) }}</div>
   <div class="col-md-4 mt-3">{{ form_row(form.adresse) }}</div>
-  {% if postulant.matricule %}
-   <div class="col-md-6 mt-3">
-    <label for="matricule">Matricule</label>
-    <input type="text" class="form-control" id="matricule" value="{{ postulant.matricule }}" disabled>
-   </div>
-  {% endif %}
-  {% if postulant.classe %}
-   <div class="col-md-6 mt-3">
-    <label for="classe">Objectif</label>
-    <input type="text" class="form-control" value="{{ postulant.classe }}" disabled>
-   </div>
-  {% endif %}
+{#  {% if postulant.matricule %}#}
+{#   <div class="col-md-6 mt-3">#}
+{#    <label for="matricule">Matricule</label>#}
+{#    <input type="text" class="form-control" id="matricule" value="{{ postulant.matricule }}" disabled>#}
+{#   </div>#}
+{#  {% endif %}#}
+{#  {% if postulant.classe %}#}
+{#   <div class="col-md-6 mt-3">#}
+{#    <label for="classe">Objectif</label>#}
+{#    <input type="text" class="form-control" value="{{ postulant.classe }}" disabled>#}
+{#   </div>#}
+{#  {% endif %}#}
  </div>
 </fieldset>
 
