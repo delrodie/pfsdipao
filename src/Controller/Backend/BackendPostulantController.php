@@ -116,7 +116,7 @@ class BackendPostulantController extends AbstractController
             $this->entityManager->flush();
 
             $redirectLink = match ($beneficiaire->getClasse()) {
-                'EMPLOI' => 'app_backend_emploi_show',
+                'EMPLOI', 'RST' => 'app_backend_emploi_show',
                 'ENTREPRENEURIAT' => 'app_backend_entrepreneuriat_show',
                 'FORMATION' => 'app_backend_beneficiaire_forme_show',
                 default => 'app_backend_postulant_show'
