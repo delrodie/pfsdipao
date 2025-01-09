@@ -89,7 +89,7 @@
                                             <td class="text-center">{{ postulant.adresse }}</td>
                                             <td class="text-center">{{ postulant.region|upper }}</td>
                                             <td class="text-center">{{ postulant.diplome ? postulant.diplome.titre : '-'}}</td>
-                                            <td class="text-center">{{ postulant.specialite.titre}}</td>
+                                            <td class="text-center">{{ postulant.specialite ? postulant.specialite.titre : '-'}}</td>
                                             <td class="text-center">{{ postulant.niveauEtude ? postulant.niveauEtude.titre : '-'}}</td>
                                             <td class="text-center">{{ postulant.natureFormation ? postulant.natureFormation.titre : '-'}}</td>
                                             <td class="text-center">{{ postulant.statut ? postulant.staut :  'POSTULANT'}}</td>
