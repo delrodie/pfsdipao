@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="col-md-4 mt-3">
                                         <label for="analphabete">Spécialité</label>
-                                        <input type="text" class="form-control" value="{{ postulant.specialite.titre}}" disabled>
+                                        <input type="text" class="form-control" value="{{ postulant.specialite ? postulant.specialite.titre : ''}}" disabled>
                                     </div>
                                     <div class="col-md-4 mt-3">
                                         <label for="analphabete">Analphabete</label>
