@@ -25,6 +25,9 @@ class GestionPostulant
     CONST FINANCEMENT_ACCORDE = 'FINANCE';
     CONST FINANCEMENT_REMBOURSE = 'REMBOURSE';
 
+    CONST GENRE_HOMME = 'HOMME';
+    CONST GENRE_FEMME = 'FEMME';
+
     public function __construct(private readonly Utilities $utilities, private readonly GestionMedia $gestionMedia, private readonly EntityManagerInterface $entityManager, private readonly UserPasswordHasherInterface $userPasswordHasher)
     {
     }

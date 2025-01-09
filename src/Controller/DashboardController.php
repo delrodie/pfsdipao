@@ -20,7 +20,9 @@ class DashboardController extends AbstractController
     {
 
         return $this->render('backend/dashboard.html.twig',[
-            'classes' => $this->statistiques->classe()
+            'classes' => $this->statistiques->classe(),
+            'finance' => $this->statistiques->finance(),
+            'genres' => $this->statistiques->genre(),
         ]);
     }
 }

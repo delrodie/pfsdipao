@@ -27,7 +27,7 @@ class AllRepositories
         private readonly UserRepository            $userRepository,
         private TamponRepository                   $tamponRepository,
         private EmploiRepository                   $emploiRepository,
-        private FormationRepository $formationRepository
+        private FormationRepository                $formationRepository,
     )
     {
     }
@@ -163,5 +163,14 @@ class AllRepositories
     public function getBeneficiaireByStatutAndClasse(string $statut = null, string $classe = null)
     {
         return $this->beneficiaireRepository->findByOneStatutAndClasse($statut, $classe);
+    }
+    public function getBeneficiaireByStatutClasseAndSexe(string $statut = null, string $classe = null, string $sexe = null)
+    {
+        return $this->beneficiaireRepository->findByOneStatutClasseAndSexe($statut, $classe, $sexe);
+    }
+
+    public function getTotalFinance()
+    {
+        return $this->entrepreunariatRepository->findTotalFinance();
     }
 }

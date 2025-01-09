@@ -36,6 +36,11 @@ class EntrepreunariatRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function findTotalFinance()
+    {
+        return $this->querySelect()->select('SUM(e.montantFinance) as total')->getQuery()->getSingleScalarResult();
+    }
+
     public function querySelect()
     {
         return $this->createQueryBuilder('e')

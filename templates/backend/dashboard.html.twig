@@ -47,16 +47,9 @@
                         <div class="card shadow-none mb-0">
                             <div class="card-body p-0">
                                 <div class="d-flex align-items-center mb-3">
-                                    <h2 class="fw-semibold mb-0">0 FCFA</h2>
+                                    <h2 class="fw-semibold mb-0">{{ finance|number_format(0,'','.')}} FCFA</h2>
                                 </div>
-                                <div class="d-flex align-items-center">
-                        <span class="ms-1">
-                          <i class="ti-user text-primary"></i>
-                        </span>
-                                    <span class="text-dark fs-3 fw-bold ms-1">Participants</span>
-                                    <span class="text-primary fw-bold fs-3 ms-2">(0)</span>
-                                </div>
-                                <button class="btn btn-light-primary text-primary w-100 mt-3"> Voir la liste </button>
+                                <a href="{{ path('app_backend_financement_entreprise_statut', {'statut': 'finance'}) }}" class="btn btn-light-primary text-primary w-100 mt-3"> Voir la liste </a>
                             </div>
                         </div>
                     </div>
@@ -78,44 +71,37 @@
                                 <table class="table mb-0 align-middle text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th class="ps-0">Contrats</th>
+                                        <th class="ps-0">Pôles</th>
                                         <th class="text-center">Femmes</th>
                                         <th class="text-center">Hommes</th>
                                         <th class="text-center">Total</th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-dark ">
+                                    {% set total_femme = 0 %}
+                                    {% set total_homme = 0 %}
+                                    {% set total_general = 0 %}
+
+                                    {% for genre in genres %}
+                                        {% set total_femme = total_femme + genre.femme %}
+                                        {% set total_homme = total_homme + genre.homme %}
+                                        {% set total_general = total_general + genre.total %}
+
                                         <tr>
-                                            <td>FORMATION / APPRENTISSAGE</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
+                                            <td class="text-start">{{ genre.titre }}</td>
+                                            <td class="text-center">{{ genre.femme }}</td>
+                                            <td class="text-center">{{ genre.homme }}</td>
+                                            <td class="text-center fw-700">{{ genre.total }}</td>
                                         </tr>
-                                    <tr>
-                                        <td>STAGE</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>CDD</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>CDI</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
+                                    {% endfor %}
+
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <td>Total</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
+                                        <td>Totaux</td>
+                                        <td class="text-center text-primary" style="font-weight: bold; font-size: 1.1rem;">{{ total_femme }}</td>
+                                        <td class="text-center text-primary" style="font-weight: bold; font-size: 1.1rem;">{{ total_homme }}</td>
+                                        <td class="text-center text-primary" style="font-weight: bold; font-size: 1.1rem;">{{ total_general }}</td>
                                     </tr>
                                     </tfoot>
                                 </table>
