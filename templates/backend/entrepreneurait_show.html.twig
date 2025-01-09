@@ -235,9 +235,9 @@
                                             <td>{{ entreprise.intitule }}</td>
                                             <td>{{ entreprise.nomEntreprise }}</td>
                                             <td>{{ entreprise.typeEntreprise }}</td>
-                                            <td>{{ entreprise.montantChiffre }}</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td class="text-center">{{ entreprise.montantChiffre }}</td>
+                                            <td class="text-center"> {{ entreprise.montantFinance }}</td>
+                                            <td class="text-center">{{ entreprise.statutRemboursement ??  'NON' }}</td>
                                             <td class="text-center">
                                                 <a href="{{ path('app_backend_projet_entreprise_show', {'id': entreprise.id}) }}" class=""><i class="ti-file"></i></a>
                                             </td>
@@ -247,9 +247,6 @@
                                 </table>
                             </div>
 
-                            <div class="text-center mt-5">
-                                <a href="{{ path('app_backend_emploi_insertion', {'id': postulant.id}) }}" class="btn btn-primary">Inserer dans un emploi</a>
-                            </div>
                         </div>
                     </div>
                 </div>

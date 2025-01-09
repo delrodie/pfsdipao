@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+<fieldset class="reset mt-5">
+    <legend class="reset">Financement</legend>
+    <div class="row block">
+        <div class="col-md-6 mt-2">{{ form_row(form.montantFinance) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.dateFinancement) }}</div>
+    </div>
+</fieldset>
+<div class="text-end mt-5">
+    {{ form_widget(form) }}
+    <a href="" class="btn btn-outline-secondary rounded-0">Annuler</a>
+    <button type="button" class="btn btn-primary rounded-0" onclick="btnSubmit()">Valider</button>
+</div>
+{{ form_end(form) }}
+

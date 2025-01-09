@@ -22,6 +22,9 @@ class GestionPostulant
     CONST CLASSE_ENTREPRENEURIAT = 'ENTREPRENEURIAT';
     CONST CLASSE_RST = 'RST';
 
+    CONST FINANCEMENT_ACCORDE = 'FINANCE';
+    CONST FINANCEMENT_REMBOURSE = 'REMBOURSE';
+
     public function __construct(private readonly Utilities $utilities, private readonly GestionMedia $gestionMedia, private readonly EntityManagerInterface $entityManager, private readonly UserPasswordHasherInterface $userPasswordHasher)
     {
     }
