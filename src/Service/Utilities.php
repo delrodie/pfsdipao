@@ -170,4 +170,21 @@ class Utilities
         $emploi->setSlug($slug);
         return true;
     }
+
+    public function uniciteFormation($beneficiaire, $formation): bool
+    {
+        $slug = $this->slug(
+            $formation->getStructure().'-'
+            .$formation->getSpecialisation()->getTitre().'-'
+            .$beneficiaire->getMatricule()
+        );
+
+        if (!$this->allRepositories->getOneFormation($slug)){
+            return false;
+        }
+
+        $formation->setSlug($slug);
+
+        return true;
+    }
 }

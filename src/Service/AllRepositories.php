@@ -8,6 +8,7 @@ use App\Repository\DiplomeRepository;
 use App\Repository\EmploiRepository;
 use App\Repository\EntrepreunariatRepository;
 use App\Repository\FormationProfessionnelleRepository;
+use App\Repository\FormationRepository;
 use App\Repository\NiveauEtudeRepository;
 use App\Repository\SpecialiteRepository;
 use App\Repository\TamponRepository;
@@ -26,6 +27,7 @@ class AllRepositories
         private readonly UserRepository            $userRepository,
         private TamponRepository                   $tamponRepository,
         private EmploiRepository                   $emploiRepository,
+        private FormationRepository $formationRepository
     )
     {
     }
@@ -139,5 +141,15 @@ class AllRepositories
     public function getAllEntrepriseByStatut(string $finance = null)
     {
         return $this->entrepreunariatRepository->findByStatut($finance);
+    }
+
+    public function getOneFormation(string $slug)
+    {
+        return $this->formationRepository->findOneBy(['slug' => $slug]);
+    }
+
+    public function getAllFormationByBeneficiaire($beneficiaire)
+    {
+        return $this->formationRepository->findByBeneficiaire($beneficiaire);
     }
 }

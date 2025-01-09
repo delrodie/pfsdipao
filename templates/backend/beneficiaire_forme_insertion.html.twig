@@ -1,6 +1,6 @@
 {% extends 'backend_layout.html.twig' %}
 
-{% block title %}{{ parent() }} Gestion liste des postulants{% endblock %}
+{% block title %}{{ parent() }} Profile {{ postulant.nom|upper }} {{ postulant.prenom|title }}{% endblock %}
 
 {% block body %}
 
@@ -9,12 +9,12 @@
             <div class="card-body px-4 py-3">
                 <div class="row align-items-center">
                     <div class="col-9">
-                        <h4 class="fw-semibold mb-8">Gestion des postulants</h4>
+                        <h4 class="fw-semibold mb-8">Gestion des bénéficiaires</h4>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class="text-muted" href="#">Modules</a></li>
-                                <li class="breadcrumb-item"><a class="text-muted" href="#">postulants</a></li>
-                                <li class="breadcrumb-item" aria-current="page">postulants</li>
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">Bénéficiaires</a></li>
+                                <li class="breadcrumb-item" aria-current="page">{{ postulant.nom|upper }} {{ postulant.prenom|title }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -32,7 +32,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Profile {{ postulant.nom|upper }}</h5></div>
+                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Profile {{ postulant.nom|upper }} {{ postulant.prenom|title }}</h5></div>
                                 <div class="col text-end">
                                     <a href="{{ path('app_backend_postulant_index') }}" class="btn btn-outline-primary"><i class="ti-list"></i> Liste des postulants</a>
                                     <a href="{{ path('app_backend_postulant_new') }}" class="btn btn-primary"><i class="ti-plus"></i> Ajouter un nouveau postulant</a>
@@ -102,107 +102,14 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset class="reset mt-5">
-                                <legend class="reset">Situation familiale</legend>
 
-                                <div class="row block">
-                                    <div class="col-md-6 mt-3">
-                                        <label for="enfant">Nombre d'enfants dans la famille</label>
-                                        <input type="number" class="form-control" value="{{ postulant.enfantFamille }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="charge">Nombre d'enfant à charge</label>
-                                        <input type="number" class="form-control" value="{{ postulant.enfantCharge }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label for="situation">Situation matrimoniale: </label>
-                                        <input type="text" class="form-control" value="{{ postulant.matrimoniale }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label for="hebergement">Hebergement</label>
-                                        <input type="text" class="form-control" value="{{ postulant.hebergement }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="type">Personne ressource (PS)</label>
-                                        <input type="text" class="form-control" value="{{ postulant.typeRessource }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="tuteur">Nom & prenoms de la PS</label>
-                                        <input type="text" class="form-control" value="{{ postulant.nomRessource|upper }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label for="telephone">Telephone de la PS</label>
-                                        <input type="text" class="form-control" value="{{ postulant.telephoneRessource }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label for="adresse">Adresse de la PS</label>
-                                        <input type="text" class="form-control" value="{{ postulant.adresseRessource|upper }}" disabled>
-                                    </div>
-                                </div>
-                            </fieldset>
 
                             <fieldset class="reset mt-5">
                                 <legend class="reset">Formation</legend>
 
-                                <div class="row block">
-                                    <div class="col-md-4 mt-3">
-                                        <label for="analphabete">Objectif</label>
-                                        <input type="text" class="form-control" value="{{ postulant.classe}}" disabled>
-                                    </div>
-                                    <div class="col-md-4 mt-3">
-                                        <label for="analphabete">Spécialité</label>
-                                        <input type="text" class="form-control" value="{{ postulant.specialite.titre}}" disabled>
-                                    </div>
-                                    <div class="col-md-4 mt-3">
-                                        <label for="analphabete">Analphabete</label>
-                                        <input type="text" class="form-control" value="{{ postulant.analphabete ? 'OUI' : 'NON' }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="niveau">Niveau d'étude</label>
-                                        <input type="text" class="form-control" value="{{ postulant.niveauEtude.titre ?? ""}}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="diplome">Diplôme</label>
-                                        <input type="text" class="form-control" value="{{ postulant.diplome.titre ??"" }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="formation">Niveau formation professionnelle</label>
-                                        <input type="text" class="form-control" value="{{ postulant.niveauFormation }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="nature">Nature formation professionnelle</label>
-                                        <input type="text" class="form-control" value="{{ postulant.natureFormation.titre ?? '' }}" disabled>
-                                    </div>
-                                </div>
+                                {{ include('backend/_form_insertion_formation.html.twig') }}
                             </fieldset>
 
-                            <fieldset class="reset mt-5">
-                                <legend class="reset">Compte utilisateur</legend>
-
-                                <div class="row block">
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Login</label>
-                                        <input type="text" class="form-control" value="{{ compte ? compte.name : ''}}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Mot de passe</label>
-                                        <input type="text" class="form-control" value="{{ compte ? compte.word|avocat ~ compte.code : '' }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Nombre de connexion</label>
-                                        <input type="text" class="form-control" value="{{ user ? user.connexion : '0' }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Date dernière connexion</label>
-                                        <input type="text" class="form-control" value="{{ user ? user.connexion ? user.lastConnectedAt|date('Y-m-d H:i:s') : ''  }}" disabled>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <div class="text-center mt-5">
-                                {{ include('backend/_select_form_postulant.html.twig') }}
-
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -269,26 +176,15 @@
             });
         });
     </script>
+    {#    <script>#}
+    {#        $('#listes').DataTable( {#}
+    {#            dom: 'Bfrtip',#}
+    {#            buttons: [#}
+    {#                'copy', 'excel', 'pdf'#}
+    {#            ]#}
+    {#        } );#}
+    {#    </script>#}
     <script>
         $(".select2").select2();
-    </script>
-
-    <script>
-        function btnSubmit() {
-            Swal.fire({
-                title: 'Attention !',
-                text: 'Une fois confirmée, l\'opération ne pourra pas être annulée ni supprimée. Voulez-vous selectionner ce postulant ?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Oui, selectionner ce postulant',
-                cancelButtonText: 'Annuler',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.querySelector('form').submit();
-                }
-            });
-        }
     </script>
 {% endblock %}

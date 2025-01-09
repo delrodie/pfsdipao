@@ -1,0 +1,171 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ parent() }} Liste des bénéficiaires en entrepreneuriat{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="card bg-light-info shadow-none position-relative overflow-hidden">
+            <div class="card-body px-4 py-3">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <h4 class="fw-semibold mb-8">Gestion des bénéficiaires</h4>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">Modules</a></li>
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">Bénéficiaires</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Entrepreneuriat</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-center mb-n5">
+                            <span class="head-icon"><i class="ti-package"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Liste des bénéficiaires</h5></div>
+                                {#                                <div class="col text-end"><a href="{{ absolute_url(path('app_backend_postulant_new')) }}" class="btn btn-primary"><i class="ti-plus"></i> Ajouter un nouveau postulant</a></div>#}
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <div id="table-loader" class="table-loader">
+                                <div class="loader"></div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="listes" class="table  border table-striped table-bordered display text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center text-uppercase">#</th>
+                                        <th class="text-center text-uppercase">Matricule</th>
+                                        <th class="text-center text-uppercase">Nom</th>
+                                        <th class="text-center text-uppercase">Prenoms</th>
+                                        <th class="text-center text-uppercase">Sexe</th>
+                                        <th class="text-center text-uppercase">Date naissance</th>
+                                        <th class="text-center text-uppercase">Lieu naissance</th>
+                                        <th class="text-center text-uppercase">Situation d'handicap</th>
+                                        <th class="text-center text-uppercase">Nationalité</th>
+                                        <th class="text-center text-uppercase">Nature de la pièce d'identité</th>
+                                        <th class="text-center text-uppercase">N° Pièce d'identité</th>
+                                        <th class="text-center text-uppercase">Contact</th>
+                                        <th class="text-center text-uppercase">Résidence</th>
+                                        <th class="text-center text-uppercase">Région</th>
+                                        <th class="text-center text-uppercase">Diplôme</th>
+                                        <th class="text-center text-uppercase">Spécialité</th>
+                                        <th class="text-center text-uppercase">Niveau d'étude</th>
+                                        <th class="text-center text-uppercase">Nature de la formation</th>
+                                        <th class="text-center text-uppercase">Statut</th>
+                                        <th class="text-center text-uppercase">Option</th>
+                                        <th class="text-center text-uppercase">actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for beneficiaire in beneficiaires %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td class="">
+                                                <a href="{{ path('app_backend_beneficiaire_forme_show', {'id': beneficiaire.id}) }}">{{ beneficiaire.matricule }}</a>
+
+                                            </td>
+                                            <td class="">{{ beneficiaire.nom|upper }}</td>
+                                            <td class="">{{ beneficiaire.prenom|upper }}</td>
+                                            <td class="text-center">{{ beneficiaire.sexe }}</td>
+                                            <td class="">{{ beneficiaire.dateNaissance|date('d/m/Y') }}</td>
+                                            <td class="">{{ beneficiaire.lieuNaissance|upper }}</td>
+                                            <td class="text-center">{{ beneficiaire.handicap ? 'NON HANDICAPE' : 'HANDICAPE' }}</td>
+                                            <td class="text-center">{{ beneficiaire.nationalite|upper }}</td>
+                                            <td class="text-center">{{ beneficiaire.natureCNI }}</td>
+                                            <td class="text-center">{{ beneficiaire.numeroCNI }}</td>
+                                            <td class="text-center">{{ beneficiaire.telephone }}</td>
+                                            <td class="text-center">{{ beneficiaire.adresse }}</td>
+                                            <td class="text-center">{{ beneficiaire.region|upper }}</td>
+                                            <td class="text-center">{{ beneficiaire.diplome ? beneficiaire.diplome.titre : '-'}}</td>
+                                            <td class="text-center">{{ beneficiaire.specialite.titre}}</td>
+                                            <td class="text-center">{{ beneficiaire.niveauEtude ? beneficiaire.niveauEtude.titre : '-'}}</td>
+                                            <td class="text-center">{{ beneficiaire.natureFormation ? beneficiaire.natureFormation.titre : '-'}}</td>
+                                            <td class="text-center"> <span class="badge {{ beneficiaire.statut|bg_statut_beneficiaire }}">{{  beneficiaire.statut }}</span></td>
+                                            <td class="text-center">{{ beneficiaire.classe}}</td>
+                                            <td class="text-center">
+                                                <a href="{{ absolute_url(path('app_backend_beneficiaire_forme_show', {'id': beneficiaire.id})) }}">
+                                                    <i class="ti-file"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="15">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('backoffice/vendor/css/prism.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backoffice/vendor/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/css/select2.min.css')) }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('backoffice/vendor/js/prism.js') }}"></script>
+    <script src="{{ asset('backoffice/vendor/DataTables/datatables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/scroller/2.4.1/js/dataTables.scroller.js"></script>
+    <script src="https://cdn.datatables.net/scroller/2.4.1/js/scroller.bootstrap5.js"></script>
+    <script>
+        $(document).ready(function() {
+            var tableLoader = $('#table-loader');
+            var table = $('#listes');
+
+            table.on('init.dt', function() {
+                tableLoader.find('.loader').hide();
+                table.show();
+            });
+
+            table.DataTable({
+                // Configurations du DataTable
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ],
+                initComplete: function() {
+                    tableLoader.find('.loader').show();
+                    table.hide();
+                },
+                // scrollCollapse: true,
+                // scroller: true,
+                scrollX: 200
+            });
+        });
+    </script>
+    {#    <script>#}
+    {#        $('#listes').DataTable( {#}
+    {#            dom: 'Bfrtip',#}
+    {#            buttons: [#}
+    {#                'copy', 'excel', 'pdf'#}
+    {#            ]#}
+    {#        } );#}
+    {#    </script>#}
+    <script>
+        $(".select2").select2();
+    </script>
+{% endblock %}

@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+<div class="row block">
+    <div class="col-md-6 mt-3">{{form_row(form.specialisation)}}</div>
+    <div class="col-md-6 mt-3">{{form_row(form.structure)}}</div>
+    <div class="col-md-4 mt-3">{{form_row(form.diplome)}}</div>
+    <div class="col-md-4 mt-3">{{form_row(form.duree)}}</div>
+    <div class="col-md-4 mt-3">{{form_row(form.commencement)}}</div>
+    <div class="text-end mt-5">
+        {{ form_widget(form) }}
+        <a href="{{ path('app_backend_beneficiaire_forme_show', {'id': postulant.id}) }}" class="btn btn-outline-primary">Annuler</a>
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </div>
+</div>
+{{ form_end(form) }}
