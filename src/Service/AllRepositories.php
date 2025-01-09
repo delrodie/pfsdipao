@@ -157,4 +157,11 @@ class AllRepositories
     {
         return $this->beneficiaireRepository->findByStatut(GestionPostulant::STATUT_BENEFICIAIRE);
     }
+
+    // STATISTIQUES
+
+    public function getBeneficiaireByStatutAndClasse(string $statut = null, string $classe = null)
+    {
+        return $this->beneficiaireRepository->findByOneStatutAndClasse($statut, $classe);
+    }
 }

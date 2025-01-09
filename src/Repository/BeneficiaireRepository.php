@@ -55,6 +55,19 @@ class BeneficiaireRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByOneStatutAndClasse(string $statut = null, string $classe)
+    {
+        return $this->querySelect()
+            ->where('b.statut = :statut')
+            ->andWhere('b.classe = :classe')
+            ->orderBy('b.nom', 'ASC')
+            ->addOrderBy('b.prenom', 'ASC')
+            ->setParameter('statut', $statut)
+            ->setParameter('classe', $classe)
+            ->getQuery()->getResult()
+            ;
+    }
+
     public function findByStatut(string $statut = null)
     {
         return $this->querySelect()
