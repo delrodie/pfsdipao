@@ -48,7 +48,7 @@ class BackendProjetEntrepriseController extends AbstractController
             $this->gestionMedia->media($form, $entreprise, 'entrepreneuriat');
 
             $entreprise->setCode($this->utilities->codeEntrepreneuriat());
-            $entreprise->setBeneficiaire($beneficiaire);
+            $entreprise->setBeneficiaire($beneficiaire); dd($entreprise);
 
             $this->entityManager->persist($entreprise);
             $this->entityManager->flush();
