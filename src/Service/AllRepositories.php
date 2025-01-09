@@ -152,4 +152,9 @@ class AllRepositories
     {
         return $this->formationRepository->findByBeneficiaire($beneficiaire);
     }
+
+    public function getAllInseres()
+    {
+        return $this->beneficiaireRepository->findByStatut(GestionPostulant::STATUT_BENEFICIAIRE);
+    }
 }
