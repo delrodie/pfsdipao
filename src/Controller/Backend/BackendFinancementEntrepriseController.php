@@ -7,6 +7,7 @@ namespace App\Controller\Backend;
 use App\Entity\Entrepreneuriat;
 use App\Form\EntrepreneuriatFormType;
 use App\Form\FinancementFormType;
+use App\Service\AllRepositories;
 use App\Service\GestionPostulant;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,14 +18,29 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/backend/financement-entreprise')]
 class BackendFinancementEntrepriseController extends AbstractController
 {
-    public function __construct(private readonly GestionPostulant $gestionPostulant, private readonly EntityManagerInterface $entityManager)
+    public function __construct(private readonly GestionPostulant $gestionPostulant, private readonly EntityManagerInterface $entityManager, private readonly AllRepositories $allRepositories)
     {
     }
 
-    #[Route('/')]
+    #[Route('/', name: 'app_backend_financement_entreprise_index')]
     public function index(): Response
     {
-        return $this->render('backend_financement_entreprise/index.html.twig');
+        return $this->render('backend/financement_entreprise_liste.html.twig',[
+            'entreprises' => $this->allRepositories->getAllEntreprises()
+        ]);
+    }
+
+    #[Route('/{statut}/', name: 'app_backend_financement_entreprise_statut', methods: ['GET'])]
+    public function statut($statut)
+    {
+        $entreprises = match ($statut){
+            'finance' => $this->allRepositories->getAllEntrepriseByStatut($this->gestionPostulant::FINANCEMENT_ACCORDE),
+            'non-finance' => $this->allRepositories->getAllEntrepriseByStatut()
+        };
+
+        return $this->render('backend/financement_entreprise_liste.html.twig',[
+            'entreprises' => $entreprises
+        ]);
     }
 
     #[Route('/{id}/new', name: 'app_backend_financement_entreprise_new', methods: ['GET', 'POST'])]

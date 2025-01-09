@@ -18,6 +18,7 @@ class TemplateExtension extends AbstractExtension
             new TwigFilter('menu_active', [TemplateExtensionRuntime::class, 'getActiveClass']),
             new TwigFilter('avocat', [TemplateExtensionRuntime::class, 'getAvocat']),
             new TwigFilter('bg_statut_beneficiaire', [TemplateExtensionRuntime::class, 'getBgStatutBeneficiaire']),
+            new TwigFilter('text_statut_entrepreneuriat', [TemplateExtensionRuntime::class, 'getColorStatutEntrepreneuriat']),
         ];
     }
 

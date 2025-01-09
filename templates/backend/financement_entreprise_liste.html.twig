@@ -1,0 +1,167 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ parent() }} Liste des projets d'entreprise{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="card bg-light-info shadow-none position-relative overflow-hidden">
+            <div class="card-body px-4 py-3">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <h4 class="fw-semibold mb-8">Gestion des projets d'entreprise</h4>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">Modules</a></li>
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">Projets d'entreprise</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Liste</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-center mb-n5">
+                            <span class="head-icon"><i class="ti-package"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Liste</h5></div>
+                                <div class="col text-end">
+                                    {#                                    <a href="{{ path('app_backend_postulant_index') }}" class="btn btn-outline-primary"><i class="ti-list"></i> Liste des postulants</a>#}
+                                    {#                                    <a href="{{ path('app_backend_postulant_new') }}" class="btn btn-primary"><i class="ti-plus"></i> Ajouter un nouveau postulant</a>#}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-body profile">
+
+                            <div class="table-responsive">
+                                <table id="listes" class="table border table-striped table-bordered display text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>CODES</th>
+                                        <th>PORTEURS</th>
+                                        <th>SEXES</th>
+                                        <th>TELEPHONES</th>
+                                        <th>PROJETS</th>
+                                        <th>ENTREPRISES</th>
+                                        <th>TYPES ENTREPRISES</th>
+                                        <th>MONTANTS DEMANDES</th>
+                                        <th>MONTANTS FINANCES</th>
+                                        <th>REMBOURSEMENTS</th>
+                                        <th>STATUTS</th>
+                                        <th>ACTIONS</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for entreprise in entreprises %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>
+                                                <a href="{{ path('app_backend_projet_entreprise_show', {'id': entreprise.id}) }}" class="">{{ entreprise.code }}</a>
+                                            </td>
+                                            <td>{{ entreprise.beneficiaire ? entreprise.beneficiaire.nom|upper : '' }} {{ entreprise.beneficiaire ? entreprise.beneficiaire.prenom|upper : '' }}</td>
+                                            <td>{{ entreprise.beneficiaire ? entreprise.beneficiaire.sexe : '' }}</td>
+                                            <td>{{ entreprise.beneficiaire ? entreprise.beneficiaire.telephone : '' }}</td>
+                                            <td>{{ entreprise.intitule }}</td>
+                                            <td>{{ entreprise.nomEntreprise }}</td>
+                                            <td>{{ entreprise.typeEntreprise }}</td>
+                                            <td class="text-center">{{ entreprise.montantChiffre }}</td>
+                                            <td class="text-center"> {{ entreprise.montantFinance }}</td>
+                                            <td class="text-center">{{ entreprise.statutRemboursement ??  'NON' }}</td>
+                                            <td class="text-center"> <span class="{{ entreprise.statut|text_statut_entrepreneuriat }}">{{ entreprise.statut ??  'NON FINANCE' }}</span></td>
+                                            <td class="text-center">
+                                                <a href="{{ path('app_backend_projet_entreprise_show', {'id': entreprise.id}) }}" class=""><i class="ti-file"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('backoffice/vendor/css/prism.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backoffice/vendor/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/css/select2.min.css')) }}">
+    <style>
+        label{
+            color: #5e5d5d;
+            font-style: italic;
+            font-size: .9rem;
+        }
+        .form-control{
+            font-weight: 700;
+            border-radius: 0;
+        }
+        .user-avatar{
+            width: 230px;
+            height: 230px;
+            object-fit: cover;
+            border: solid 1px #ccc;
+            padding: 7px;
+        }
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('backoffice/vendor/js/prism.js') }}"></script>
+    <script src="{{ asset('backoffice/vendor/DataTables/datatables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/scroller/2.4.1/js/dataTables.scroller.js"></script>
+    <script src="https://cdn.datatables.net/scroller/2.4.1/js/scroller.bootstrap5.js"></script>
+    <script>
+        $(document).ready(function() {
+            var tableLoader = $('#table-loader');
+            var table = $('#listes');
+
+            table.on('init.dt', function() {
+                tableLoader.find('.loader').hide();
+                table.show();
+            });
+
+            table.DataTable({
+                // Configurations du DataTable
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ],
+                initComplete: function() {
+                    tableLoader.find('.loader').show();
+                    table.hide();
+                },
+                // scrollCollapse: true,
+                // scroller: true,
+                scrollX: 200
+            });
+        });
+    </script>
+    {#    <script>#}
+    {#        $('#listes').DataTable( {#}
+    {#            dom: 'Bfrtip',#}
+    {#            buttons: [#}
+    {#                'copy', 'excel', 'pdf'#}
+    {#            ]#}
+    {#        } );#}
+    {#    </script>#}
+    <script>
+        $(".select2").select2();
+    </script>
+{% endblock %}

@@ -139,11 +139,19 @@
                               <span class="d-flex">
                                 <i class="ti-package"></i>
                               </span>
-                            <span class="hide-menu">Projets</span>
+                            <span class="hide-menu">Projets d'entreprise</span>
                         </a>
                         <ul aria-expanded="false" class="collapse first-level">
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">
+                                <a href="{{ path('app_backend_financement_entreprise_index') }}" class="sidebar-link">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti-angle-right"></i>
+                                    </div>
+                                    <span class="hide-menu">Tous</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ path('app_backend_financement_entreprise_statut', {'statut': 'finance'}) }}" class="sidebar-link">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti-angle-right"></i>
                                     </div>
@@ -151,7 +159,7 @@
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">
+                                <a href="{{ path('app_backend_financement_entreprise_statut', {'statut': 'non-finance'}) }}" class="sidebar-link">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti-angle-right"></i>
                                     </div>

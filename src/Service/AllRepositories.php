@@ -23,9 +23,9 @@ class AllRepositories
         private SpecialiteRepository               $specialiteRepository,
         private FormationProfessionnelleRepository $formationProfessionnelleRepository,
         private EntrepreunariatRepository          $entrepreunariatRepository,
-        private readonly UserRepository $userRepository,
-        private TamponRepository $tamponRepository,
-        private EmploiRepository $emploiRepository,
+        private readonly UserRepository            $userRepository,
+        private TamponRepository                   $tamponRepository,
+        private EmploiRepository                   $emploiRepository,
     )
     {
     }
@@ -129,5 +129,15 @@ class AllRepositories
     public function getAllEntrepriseByBeneficiaire($beneficiaire)
     {
         return $this->entrepreunariatRepository->findBy(['beneficiaire' => $beneficiaire], ['createdAt' => 'DESC']);
+    }
+
+    public function getAllEntreprises()
+    {
+        return $this->entrepreunariatRepository->findAllEntreprises();
+    }
+
+    public function getAllEntrepriseByStatut(string $finance = null)
+    {
+        return $this->entrepreunariatRepository->findByStatut($finance);
     }
 }

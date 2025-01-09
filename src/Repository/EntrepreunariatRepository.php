@@ -16,6 +16,34 @@ class EntrepreunariatRepository extends ServiceEntityRepository
         parent::__construct($registry, Entrepreneuriat::class);
     }
 
+    public function findAllEntreprises()
+    {
+        return $this->querySelect()->getquery()->getResult();
+    }
+    public function findAllEntreprisesByStatut(string $finance = null)
+    {
+        return $this->querySelect()->andWhere('e.statut = :statut')->setParameter('statut', $finance)->getquery()->getResult();
+    }
+    public function findByStatut(?string $finance = null)
+    {
+        $query = $this->querySelect();
+
+        if ($finance) {
+            $query->andWhere('e.statut = :statut')->setParameter('statut', $finance);
+        }else{
+            $query->where('e.statut IS NULL');
+        }
+        return $query->getQuery()->getResult();
+    }
+
+    public function querySelect()
+    {
+        return $this->createQueryBuilder('e')
+            ->addSelect('b')
+            ->leftJoin('e.beneficiaire', 'b')
+            ;
+    }
+
     //    /**
     //     * @return Entrepreneuriat[] Returns an array of Entrepreneuriat objects
     //     */

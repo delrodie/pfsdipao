@@ -35,4 +35,13 @@ class TemplateExtensionRuntime implements RuntimeExtensionInterface
             default => '',
         };
     }
+
+    public function getColorStatutEntrepreneuriat($value)
+    {
+        return match ($value) {
+            'FINANCE' => 'text-primary fw-700',
+            default => 'text-danger fw-700',
+        };
+
+    }
 }
