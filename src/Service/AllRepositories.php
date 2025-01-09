@@ -125,4 +125,9 @@ class AllRepositories
     {
         return $this->emploiRepository->findBy(['beneficiaire' => $beneficiaire], ['commencement' => 'DESC']);
     }
+
+    public function getAllEntrepriseByBeneficiaire($beneficiaire)
+    {
+        return $this->entrepreunariatRepository->findBy(['beneficiaire' => $beneficiaire], ['createdAt' => 'DESC']);
+    }
 }

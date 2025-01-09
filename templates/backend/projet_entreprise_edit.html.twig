@@ -1,0 +1,188 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ parent() }} Projet d'entreprise de {{ entrepreneuriat.beneficiaire.nom|upper }} {{ entrepreneuriat.beneficiaire.prenom|title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="card bg-light-info shadow-none position-relative overflow-hidden">
+            <div class="card-body px-4 py-3">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <h4 class="fw-semibold mb-8">Gestion des projets d'entreprises</h4>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">Modules</a></li>
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">Projets d'entreprise</a></li>
+                                <li class="breadcrumb-item" aria-current="page">{{ entrepreneuriat.beneficiaire.nom|upper }} {{ entrepreneuriat.beneficiaire.prenom|title }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-center mb-n5">
+                            <span class="head-icon"><i class="ti-package"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Projet de {{ entrepreneuriat.beneficiaire.nom|upper }} {{ entrepreneuriat.beneficiaire.prenom|title }}</h5></div>
+                                <div class="col text-end">
+                                    {#                                    <a href="{{ path('app_backend_postulant_index') }}" class="btn btn-outline-primary"><i class="ti-list"></i> Liste des postulants</a>#}
+                                    {#                                    <a href="{{ path('app_backend_postulant_new') }}" class="btn btn-primary"><i class="ti-plus"></i> Ajouter un nouveau postulant</a>#}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-body profile">
+                            <fieldset class="reset">
+                                <legend class="reset">Identité civile</legend>
+                                <div class="row mt-4 mb-4">
+                                    <div class="col-lg-4 text-center">
+                                        <img src="{{ absolute_url(asset(entrepreneuriat.beneficiaire.media ? 'upload/profile/' ~ entrepreneuriat.beneficiaire.media : 'assets/img/user2.png'))  }}" alt="" class="img-fluid user-avatar">
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-4 mt-3">
+                                                <label for="">Matricule</label>
+                                                <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.matricule }}" disabled>
+                                            </div>
+                                            <div class="col-8 mt-3">
+                                                <label for="">Nom de famille</label>
+                                                <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.nom|upper }}" disabled>
+                                            </div>
+                                            <div class="col-12 mt-3">
+                                                <label for="">Prenoms</label>
+                                                <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.prenom|upper }}" disabled>
+                                            </div>
+                                            <div class="col-5 mt-3">
+                                                <label for="">Date de naissance</label>
+                                                <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.dateNaissance|date('d/m/Y') }}" disabled>
+                                            </div>
+                                            <div class="col-7 mt-3">
+                                                <label for="">Lieu de naissance</label>
+                                                <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.lieuNaissance|upper }}" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <label for="">Sexe</label>
+                                        <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.sexe }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <label for="">Nationalité</label>
+                                        <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.nationalite|upper }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <label for="">Région</label>
+                                        <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.region|upper }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3 mt-3">
+                                        <label for="">Nature CNI</label>
+                                        <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.natureCNI }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3 mt-3">
+                                        <label for="">Numero CNI</label>
+                                        <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.numeroCNI }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3 mt-3">
+                                        <label for="">Téléphone</label>
+                                        <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.telephone }}" disabled>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3 mt-3">
+                                        <label for="">Résidence actuelle</label>
+                                        <input type="text" class="form-control" value="{{ entrepreneuriat.beneficiaire.adresse }}" disabled>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            {{ include('backend/_form_projet_entreprise.html.twig', {'button_label':'Mettre à jour'}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('backoffice/vendor/css/prism.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backoffice/vendor/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/css/select2.min.css')) }}">
+    <style>
+        label{
+            color: #5e5d5d;
+            font-style: italic;
+            font-size: .9rem;
+        }
+        .form-control{
+            font-weight: 700;
+            border-radius: 0;
+        }
+        .user-avatar{
+            width: 230px;
+            height: 230px;
+            object-fit: cover;
+            border: solid 1px #ccc;
+            padding: 7px;
+        }
+
+        .block ul li{
+            font-style: italic;
+            color: darkred;
+        }
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('backoffice/vendor/js/prism.js') }}"></script>
+    <script src="{{ asset('backoffice/vendor/DataTables/datatables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/scroller/2.4.1/js/dataTables.scroller.js"></script>
+    <script src="https://cdn.datatables.net/scroller/2.4.1/js/scroller.bootstrap5.js"></script>
+    <script>
+        $(document).ready(function() {
+            var tableLoader = $('#table-loader');
+            var table = $('#listes');
+
+            table.on('init.dt', function() {
+                tableLoader.find('.loader').hide();
+                table.show();
+            });
+
+            table.DataTable({
+                // Configurations du DataTable
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ],
+                initComplete: function() {
+                    tableLoader.find('.loader').show();
+                    table.hide();
+                },
+                // scrollCollapse: true,
+                // scroller: true,
+                scrollX: 200
+            });
+        });
+    </script>
+    {#    <script>#}
+    {#        $('#listes').DataTable( {#}
+    {#            dom: 'Bfrtip',#}
+    {#            buttons: [#}
+    {#                'copy', 'excel', 'pdf'#}
+    {#            ]#}
+    {#        } );#}
+    {#    </script>#}
+    <script>
+        $(".select2").select2();
+    </script>
+{% endblock %}

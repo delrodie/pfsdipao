@@ -124,6 +124,15 @@ class Entrepreneuriat
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $montantFinance = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateFinancement = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $statutRemboursement = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -571,5 +580,41 @@ class Entrepreneuriat
     public function setUpdatedAtValue(): \DateTime
     {
         return $this->updateAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
+    public function getMontantFinance(): ?int
+    {
+        return $this->montantFinance;
+    }
+
+    public function setMontantFinance(?int $montantFinance): static
+    {
+        $this->montantFinance = $montantFinance;
+
+        return $this;
+    }
+
+    public function getDateFinancement(): ?\DateTimeInterface
+    {
+        return $this->dateFinancement;
+    }
+
+    public function setDateFinancement(?\DateTimeInterface $dateFinancement): static
+    {
+        $this->dateFinancement = $dateFinancement;
+
+        return $this;
+    }
+
+    public function getStatutRemboursement(): ?string
+    {
+        return $this->statutRemboursement;
+    }
+
+    public function setStatutRemboursement(?string $statutRemboursement): static
+    {
+        $this->statutRemboursement = $statutRemboursement;
+
+        return $this;
     }
 }

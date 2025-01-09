@@ -1,0 +1,74 @@
+{{ form_start(form) }}
+<fieldset class="reset mt-5">
+    <legend class="reset">Description du projet</legend>
+    <div class="row block">
+        <div class="col-md-6 mt-2">{{ form_row(form.intitule) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.nomEntreprise) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.typeEntreprise) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.adresse) }}</div>
+        <div class="col-md-12 mt-2">{{ form_row(form.objectif) }}</div>
+    </div>
+</fieldset>
+
+<fieldset class="reset mt-5">
+    <legend class="reset">Plan de developpement</legend>
+
+    <div class="row block">
+        <div class="col-md-6 mt-2">{{ form_row(form.produitPropose) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.force) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.matierePremiere) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.lieuMatierePremiere) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.clientActuel) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.clientFutur)}} </div>
+        <div class="col-md-6 mt-2">{{ form_row(form.concurrent) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.prixProduit) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.beneficeProduit) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.fixeProduit) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.modePaiement) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.modeVente) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.promotion) }}</div>
+    </div>
+</fieldset>
+
+<fieldset class="reset mt-5">
+    <legend class="reset">Identité de l'aval</legend>
+
+    <div class="row block">
+        <div class="col-md-6 mt-2">{{ form_row(form.nomAval) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.dateNaissanceAval) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.lieuNaissanceAval) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.residenceAval) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.professionAval) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.telephoneAval) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.emailAval) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.media) }}</div>
+        <div class="col-md-6 mt-2"></div>
+    </div>
+</fieldset>
+
+<fieldset class="reset mt-5">
+    <legend class="reset">Financement</legend>
+
+    <div class="row block">
+        <div class="col-12 mt-3">
+            <em>- Quel montant d'argent le bénéficiaire désire-t-il avoir pour commencer son activité?</em>
+        </div>
+        <div class="col-md-6 mt-2">{{ form_row(form.montantChiffre) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.montantLettre) }}</div>
+
+        <div class="col-12 mt-3">
+            <em>- Comment le bénéficiaire compte-t-il effectuer le remboursement?</em>
+
+        </div>
+        <div class="col-md-6 mt-2">{{ form_row(form.modeRemboursement) }}</div>
+        <div class="col-md-6 mt-2">{{ form_row(form.autreMode) }}</div>
+    </div>
+</fieldset>
+
+{{ form_widget(form) }}
+<div class="text-end mt-5">
+    <a href="{{ absolute_url(path('app_frontend_entrepreneuriat_tbord')) }}" class="btn btn-outline-secondary rounded-0">Annuler</a>
+    <button type="submit" class="btn btn-primary rounded-0">{{ button_label|default('Enregistrer') }}</button>
+</div>
+{{ form_end(form) }}
+

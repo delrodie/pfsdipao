@@ -109,13 +109,22 @@ class BackendPostulantController extends AbstractController
     #[Route('/{id}/select/ok', name: 'app_backend_postulant_select', methods: ['POST'])]
     public function select(Request $request, Beneficiaire $beneficiaire)
     {
+        $redirectLink = 'app_backend_postulant_show';
         if ($this->isCsrfTokenValid('select'.$beneficiaire->getId(), $request->getPayload()->getString('_token'))) {
 //            dd($beneficiaire);
             $beneficiaire->setStatut('SELECTIONNER');
             $this->entityManager->flush();
+
+            $redirectLink = match ($beneficiaire->getClasse()) {
+                'EMPLOI' => 'app_backend_emploi_show',
+                'ENTREPRENEURIAT' => 'app_backend_entrepreneuriat_show',
+                default => 'app_backend_postulant_show'
+            };
         }
 
-        return $this->redirectToRoute('app_backend_beneficiaire_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute($redirectLink, [
+            'id' => $beneficiaire->getId()
+        ], Response::HTTP_SEE_OTHER);
     }
 
 }

@@ -34,8 +34,8 @@
                             <div class="row">
                                 <div class="col"><h5 class="mb-2 fw-semibold fs-4">Profile {{ postulant.nom|upper }} {{ postulant.prenom|title }}</h5></div>
                                 <div class="col text-end">
-                                    <a href="{{ path('app_backend_postulant_index') }}" class="btn btn-outline-primary"><i class="ti-list"></i> Liste des postulants</a>
-                                    <a href="{{ path('app_backend_postulant_new') }}" class="btn btn-primary"><i class="ti-plus"></i> Ajouter un nouveau postulant</a>
+{#                                    <a href="{{ path('app_backend_postulant_index') }}" class="btn btn-outline-primary"><i class="ti-list"></i> Liste des postulants</a>#}
+{#                                    <a href="{{ path('app_backend_postulant_new') }}" class="btn btn-primary"><i class="ti-plus"></i> Ajouter un nouveau postulant</a>#}
                                 </div>
                             </div>
 
@@ -199,32 +199,48 @@
                                 </div>
                             </fieldset>
 
-                            <h6 class="card-title legend mt-5">Liste des emplois bénéficiés</h6>
-                            <hr>
 
+
+                            <div class="row mt-5">
+                                <div class="col">
+                                    <h6 class="card-title legend">Liste des projets d'entreprise</h6>
+                                </div>
+                                <div class="col text-end">
+                                    <a href="{{ path('app_backend_projet_entreprise_new', {'beneficiaire': postulant.id}) }}" class="btn btn-outline-primary btn-sm"><i class="ti-plus"></i> Ajouter un projet d'entreprise</a>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="table-responsive">
-                                <table id="listes" class="table  border table-striped table-bordered display text-nowrap">
+                                <table id="listes" class="table border table-striped table-bordered display text-nowrap">
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>CONTRATS</th>
+                                        <th>CODES</th>
+                                        <th>PROJETS</th>
                                         <th>ENTREPRISES</th>
-                                        <th>SALAIRES</th>
-                                        <th>DUREE</th>
-                                        <th>DEBUT</th>
+                                        <th>TYPES ENTREPRISES</th>
+                                        <th>MONTANTS DEMANDES</th>
+                                        <th>MONTANTS FINANCES</th>
+                                        <th>REMBOURSEMENTS</th>
                                         <th>ACTIONS</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for emploi in emplois %}
+                                    {% for entreprise in entreprises %}
                                         <tr>
                                             <td>{{ loop.index }}</td>
-                                            <td>{{ emploi.contrat }}</td>
-                                            <td>{{ emploi.entreprise }}</td>
-                                            <td>{{ emploi.salaire }}</td>
-                                            <td>{{ emploi.duree }}</td>
-                                            <td>{{ emploi.commencement|date('Y-m-d') }}</td>
+                                            <td>
+                                                <a href="{{ path('app_backend_projet_entreprise_show', {'id': entreprise.id}) }}" class="">{{ entreprise.code }}</a>
+                                            </td>
+                                            <td>{{ entreprise.intitule }}</td>
+                                            <td>{{ entreprise.nomEntreprise }}</td>
+                                            <td>{{ entreprise.typeEntreprise }}</td>
+                                            <td>{{ entreprise.montantChiffre }}</td>
                                             <td></td>
+                                            <td></td>
+                                            <td class="text-center">
+                                                <a href="{{ path('app_backend_projet_entreprise_show', {'id': entreprise.id}) }}" class=""><i class="ti-file"></i></a>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

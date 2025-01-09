@@ -163,7 +163,7 @@ class EntrepreneuriatFormType extends AbstractType
                 'multiple' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => "20000k",
+                        'maxSize' => "600000k",
                         'mimeTypes' =>[
                             'image/png',
                             'image/jpeg',
