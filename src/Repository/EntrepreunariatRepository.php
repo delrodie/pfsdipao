@@ -35,6 +35,58 @@ class EntrepreunariatRepository extends ServiceEntityRepository
         }
         return $query->getQuery()->getResult();
     }
+    public function findByRemboursement(?string $remboursement = null, string $finance = null)
+    {
+        $query = $this->querySelect();
+
+        if ($remboursement) {
+            $query
+                ->andWhere('e.statutRemboursement = :statut')
+                ->andWhere('e.statut = :finance')
+                ->setParameter('statut', $remboursement)
+                ->setParameter('finance', $finance);
+        }else{
+            $query->where('e.statutRemboursement IS NULL')
+            ->andWhere('e.statut = :finance')
+            ->setParameter('finance', $finance);
+        }
+        return $query->getQuery()->getResult();
+    }
+
+    public function findByStatutAndSexe(string $finance = null, string $sexe = null)
+    {
+        $query = $this->querySelect();
+
+        if ($finance) {
+            $query->andWhere('e.statut = :statut')
+                ->andWhere('b.sexe = :sexe')
+                ->setParameter('statut', $finance)
+                ->setParameter('sexe', $sexe);
+        }else{
+            $query->where('e.statut IS NULL')
+            ->andWhere('b.sexe = :sexe')
+            ->setParameter('sexe', $sexe);
+        }
+        return $query->getQuery()->getResult();
+    }
+    public function findByRemboursementAndSexe(string $remboursement = null, string $sexe = null, string $finance = null)
+    {
+        $query = $this->querySelect();
+
+        if ($remboursement) {
+            $query->andWhere('e.statutRemboursement = :statut')
+                ->andWhere('b.sexe = :sexe')
+                ->setParameter('statut', $remboursement)
+                ->setParameter('sexe', $sexe);
+        }else{
+            $query->where('e.statutRemboursement IS NULL')
+                ->andWhere('b.sexe = :sexe')
+                ->andWhere('b.statut = :statut')
+                ->setParameter('sexe', $sexe)
+                ->setParameter('statut', $finance);
+        }
+        return $query->getQuery()->getResult();
+    }
 
     public function findTotalFinance()
     {

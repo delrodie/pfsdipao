@@ -44,4 +44,41 @@ class Statistiques
     {
         return $this->allRepositories->getTotalFinance();
     }
+
+    public function financement(string  $finance = null): array
+    {
+        if ($finance) {
+            $resultat = [
+                'total' => count($this->allRepositories->getAllEntrepriseByStatut($finance)),
+                'femme' => count($this->allRepositories->getAllEntrepriseByStatutAndSexe($finance, GestionPostulant::GENRE_FEMME)),
+                'homme' => count($this->allRepositories->getAllEntrepriseByStatutAndSexe($finance, GestionPostulant::GENRE_HOMME)),
+            ];
+        }else{
+            $resultat = [
+                'total' => count($this->allRepositories->getAllEntrepriseByStatut()),
+                'femme' => count($this->allRepositories->getAllEntrepriseByStatutAndSexe(null, GestionPostulant::GENRE_FEMME)),
+                'homme' => count($this->allRepositories->getAllEntrepriseByStatutAndSexe(null, GestionPostulant::GENRE_HOMME)),
+            ];
+        }
+
+        return $resultat;
+    }
+    public function remboursement(string  $remboursement = null): array
+    {
+        if ($remboursement) {
+            $resultat = [
+                'total' => count($this->allRepositories->getAllEntrepriseByRemboursement($remboursement)),
+                'femme' => count($this->allRepositories->getAllEntrepriseByRemboursementAndSexe($remboursement, GestionPostulant::GENRE_FEMME)),
+                'homme' => count($this->allRepositories->getAllEntrepriseByRemboursementAndSexe($remboursement, GestionPostulant::GENRE_HOMME)),
+            ];
+        }else{
+            $resultat = [
+                'total' => count($this->allRepositories->getAllEntrepriseByRemboursement(null, GestionPostulant::FINANCEMENT_ACCORDE)),
+                'femme' => count($this->allRepositories->getAllEntrepriseByRemboursementAndSexe(null, GestionPostulant::GENRE_FEMME, GestionPostulant::FINANCEMENT_ACCORDE)),
+                'homme' => count($this->allRepositories->getAllEntrepriseByRemboursementAndSexe(null, GestionPostulant::GENRE_HOMME, GestionPostulant::FINANCEMENT_ACCORDE)),
+            ];
+        }
+
+        return $resultat;
+    }
 }

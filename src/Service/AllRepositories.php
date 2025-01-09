@@ -142,6 +142,18 @@ class AllRepositories
     {
         return $this->entrepreunariatRepository->findByStatut($finance);
     }
+    public function getAllEntrepriseByStatutAndSexe(string $finance = null, string $sexe = null)
+    {
+        return $this->entrepreunariatRepository->findByStatutAndSexe($finance, $sexe);
+    }
+    public function getAllEntrepriseByRemboursement(string $remboursement = null, string $finance = null)
+    {
+        return $this->entrepreunariatRepository->findByRemboursement($remboursement, $finance);
+    }
+    public function getAllEntrepriseByRemboursementAndSexe(string $remboursement = null, string $sexe = null, string $finance = null)
+    {
+        return $this->entrepreunariatRepository->findByRemboursementAndSexe($remboursement, $sexe, $finance);
+    }
 
     public function getOneFormation(string $slug)
     {
