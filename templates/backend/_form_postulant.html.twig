@@ -59,12 +59,12 @@
   <div class="col-md-3 mt-3">
    <label for="beneficiaire_form_objectif">Objectif *</label>
    <select name="beneficiaire_form_objectif" id="beneficiaire_form[objectif]" class="form-select" required>
-    {% if postulant.classe %}
-     <option value="{{ postulant.classe }}">{{ postulant.classe }}</option>
-     <option value=""></option>
-     {% else %}
-      <option value="">-- Selectionnez --</option>
-    {% endif %}
+{#    {% if postulant.classe %}#}
+{#     <option value="{{ postulant.classe }}">{{ postulant.classe }}</option>#}
+{#     <option value=""></option>#}
+{#     {% else %}#}
+{#    {% endif %}#}
+    <option value="">-- Selectionnez --</option>
     <option value="EMPLOI">Emploi</option>
     <option value="ENTREPRENEURIAT">Entrepreneuriat</option>
     <option value="FORMATION">Formation</option>
