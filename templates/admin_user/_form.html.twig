@@ -1,0 +1,23 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="row">
+                <div class="col-12 mt-3">{{ form_row(form.username) }}</div>
+                <div class="col-12 mt-3">{{ form_row(form.password) }}</div>
+                {% for role in form.roles %}
+                    <div class="form-check col-12 mt-3">
+                        {{ form_widget(role,{"attr":{"class":"form-check-input"}}) }}
+                        {{ form_label(role,null, {"attr":{"class":'form-check-label'}}) }}
+                        {{ form_errors(role) }}
+                    </div>
+                {% endfor %}
+            </div>
+            {{ form_widget(form) }}
+            <div class="text-end mt-5">
+                <a href="{{ path('app_admin_user_index') }}" class="btn btn-outline-secondary rounded-0">Annuler</a>
+                <button class="btn btn-primary rounded-0">{{ button_label|default('Enregistrer') }}</button>
+            </div>
+        </div>
+    </div>
+
+{{ form_end(form) }}

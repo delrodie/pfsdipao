@@ -185,4 +185,33 @@ class AllRepositories
     {
         return $this->entrepreunariatRepository->findTotalFinance();
     }
+
+    public function getUsers(string $username)
+    {
+        $getUsers = $this->userRepository->findWithout(['username' => $username]);
+        $users = [];
+
+        foreach ($getUsers as $getUser) {
+            $roles = $getUser->getRoles()[0] ?? $getUser->getRoles();
+            $role = match ($roles) {
+                'ROLE_EMPLOI' => 'Conseiller Emploi',
+                'ROLE_ENTREPRENEURIAT' => 'Conseiller Entreprise',
+                'ROLE_FORMATION' => 'Conseiller Formation',
+                'ROLE_ADMIN' => 'Administrateur',
+                'ROLE_SUPER_ADMIN' => 'Super Administrateur',
+                default => 'Utilisateur'
+            };
+
+            $users[] = [
+                'id' => $getUser->getId(),
+                'userIdentifier' => $getUser->getUserIdentifier(),
+                'role' => $role,
+                'connexion' => $getUser->getConnexion(),
+                'lastConnectedAt' => $getUser->getLastConnectedAt(),
+                'statut' => $getUser->getStatut()
+            ];
+        }
+
+        return $users;
+    }
 }

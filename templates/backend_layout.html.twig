@@ -193,24 +193,26 @@
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">PARAMETRES</span>
                     </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                               <span class="d-flex">
                                 <i class="ti-lock"></i>
                               </span>
-                            <span class="hide-menu">Sécurité</span>
-                        </a>
-                        <ul aria-expanded="false" class="collapse first-level">
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">
-                                    <div class="round-16 d-flex align-items-center justify-content-center">
-                                        <i class="ti-angle-right"></i>
-                                    </div>
-                                    <span class="hide-menu">Utilisateurs</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                                <span class="hide-menu">Sécurité</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a href="{{ path('app_admin_user_index') }}" class="sidebar-link">
+                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                            <i class="ti-angle-right"></i>
+                                        </div>
+                                        <span class="hide-menu">Utilisateurs</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->
