@@ -6,7 +6,7 @@ namespace App\Controller\Backend;
 
 use App\Entity\Beneficiaire;
 use App\Entity\Entrepreneuriat;
-use App\Form\EntrepreneuriatFormType;
+use App\Form\ProjetEntrepriseType;
 use App\Service\GestionMedia;
 use App\Service\Utilities;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +32,7 @@ class BackendProjetEntrepriseController extends AbstractController
     public function new(Request $request, Beneficiaire $beneficiaire)
     {
         $entreprise = new Entrepreneuriat();
-        $form = $this->createForm(EntrepreneuriatFormType::class, $entreprise);
+        $form = $this->createForm(ProjetEntrepriseType::class, $entreprise);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,7 +77,7 @@ class BackendProjetEntrepriseController extends AbstractController
     #[Route('/{id}/modifier/projet', name: 'app_backend_projet_entreprise_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Entrepreneuriat $entrepreneuriat): Response
     {
-        $form = $this->createForm(EntrepreneuriatFormType::class, $entrepreneuriat);
+        $form = $this->createForm(ProjetEntrepriseType::class, $entrepreneuriat);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

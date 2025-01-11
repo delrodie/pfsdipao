@@ -133,6 +133,21 @@ class Entrepreneuriat
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $statutRemboursement = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nomReferenant = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fonctionReferant = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $telephoneReferant = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $compteBancaireAval = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $banqueAval = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -613,6 +628,66 @@ class Entrepreneuriat
     public function setStatutRemboursement(?string $statutRemboursement): static
     {
         $this->statutRemboursement = $statutRemboursement;
+
+        return $this;
+    }
+
+    public function getNomReferenant(): ?string
+    {
+        return $this->nomReferenant;
+    }
+
+    public function setNomReferenant(?string $nomReferenant): static
+    {
+        $this->nomReferenant = $nomReferenant;
+
+        return $this;
+    }
+
+    public function getFonctionReferant(): ?string
+    {
+        return $this->fonctionReferant;
+    }
+
+    public function setFonctionReferant(?string $fonctionReferant): static
+    {
+        $this->fonctionReferant = $fonctionReferant;
+
+        return $this;
+    }
+
+    public function getTelephoneReferant(): ?string
+    {
+        return $this->telephoneReferant;
+    }
+
+    public function setTelephoneReferant(?string $telephoneReferant): static
+    {
+        $this->telephoneReferant = $telephoneReferant;
+
+        return $this;
+    }
+
+    public function getCompteBancaireAval(): ?string
+    {
+        return $this->compteBancaireAval;
+    }
+
+    public function setCompteBancaireAval(?string $compteBancaireAval): static
+    {
+        $this->compteBancaireAval = $compteBancaireAval;
+
+        return $this;
+    }
+
+    public function getBanqueAval(): ?string
+    {
+        return $this->banqueAval;
+    }
+
+    public function setBanqueAval(?string $banqueAval): static
+    {
+        $this->banqueAval = $banqueAval;
 
         return $this;
     }

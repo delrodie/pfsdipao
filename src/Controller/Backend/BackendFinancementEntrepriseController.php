@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Backend;
 
 use App\Entity\Entrepreneuriat;
-use App\Form\EntrepreneuriatFormType;
 use App\Form\FinancementFormType;
 use App\Service\AllRepositories;
 use App\Service\GestionPostulant;
