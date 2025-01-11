@@ -44,14 +44,10 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-         - { path: ^/dashboard, roles: ROLE_EMPLOI }
-         - { path: ^/dashboard, roles: ROLE_ENTREPRENEURIAT }
-         - { path: ^/dashboard, roles: ROLE_FORMATION }
-#         - { path: ^/dashboard, roles: ROLE_ADMIN }
-         - { path: ^/backend/, roles: ROLE_EMPLOI }
-         - { path: ^/backend/, roles: ROLE_ENTREPRENEURIAT }
-         - { path: ^/backend/, roles: ROLE_FORMATION }
-#         - { path: ^/backend/, roles: ROLE_ADMIN }
+         - { path: ^/dashboard, roles: [ROLE_EMPLOI, ROLE_ENTREPRENEURIAT, ROLE_FORMATION] }
+         - { path: ^/dashboard, roles: ROLE_ADMIN }
+         - { path: ^/backend/, roles: [ROLE_EMPLOI, ROLE_ENTREPRENEURIAT, ROLE_FORMATION] }
+         - { path: ^/backend/, roles: ROLE_ADMIN }
          - { path: ^/admin/, roles: ROLE_ADMIN }
          - { path: ^/beneficiaire/, roles: ROLE_USER }
          - { path: ^/curiculum/, roles: ROLE_USER }
