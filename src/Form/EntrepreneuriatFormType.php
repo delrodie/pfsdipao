@@ -55,7 +55,7 @@ class EntrepreneuriatFormType extends AbstractType
                 'label' => "Quels produits / services proposez-vous?",
                 'required' =>  false
             ])
-            ->add('force', TextareaType::class,[
+            ->add('forceFaiblesse', TextareaType::class,[
                 'attr' => ['class' => 'form-control', 'autocomplete'=>"off"],
                 'label' => "Quelles sont les forces?",
                 'required' => false

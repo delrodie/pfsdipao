@@ -26,7 +26,9 @@ class EmploiFormType extends AbstractType
                     'Stage' => 'STAGE',
                     'Apprentissage' => 'APPRENTISSAGE',
                     'Autre' => 'AUTRE'
-                ]
+                ],
+                'required' => true,
+                'label' => 'Type de contrat *'
             ])
             ->add('entreprise', TextType::class,[
                 'attr' => ['class' => 'form-control', 'autocomplete' => 'off'],
@@ -37,9 +39,9 @@ class EmploiFormType extends AbstractType
                 'label' => "Salaire",
                 'required' => false
             ])
-            ->add('duree', TextType::class,[
+            ->add('duree', IntegerType::class,[
                 'attr' => ['class' => 'form-control', 'autocomplete' => 'off'],
-                'label' => "Durée de l'emploi",
+                'label' => "Durée de l'emploi (mois)",
                 'required' => false
             ])
             ->add('commencement', null, [

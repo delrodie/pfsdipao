@@ -171,19 +171,19 @@ class BeneficiaireFormType extends AbstractType
                     'Tuteur/tutrice' => "TUTEUR/TUTRICE",
                     'Conjoint(e)' => "CONJOINT(E)"
                 ],
-                'label' => "Personne ressource (Urgence) *"
+                'label' => "Personne à contacter en cas d'urgence *"
             ])
             ->add('nomRessource', TextType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
-                'label' => "Nom & prenoms de la personne ressource *"
+                'label' => "Nom & prenoms de la personne à contacter *"
             ])
             ->add('telephoneRessource', TextType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
-                'label' => "Téléphone de la personne ressource *"
+                'label' => "Téléphone de la personne à contacter *"
             ])
             ->add('adresseRessource', TextType::class,[
                 'attr'=>['class' => "form-control", 'autocomplete'=>"off"],
-                'label' => "Lieu de résidence de la personne ressource *"
+                'label' => "Lieu de résidence de la personne à contacter *"
             ])
             ->add('analphabete', ChoiceType::class,[
                 'attr' => ['class' => 'form-control'],

@@ -38,7 +38,7 @@ class Entrepreneuriat
     private ?string $produitPropose = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $force = null;
+    private ?string $forceFaiblesse = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $matierePremiere = null;
@@ -210,17 +210,16 @@ class Entrepreneuriat
         return $this;
     }
 
-    public function getForce(): ?string
+    public function getForceFaiblesse(): ?string
     {
-        return $this->force;
+        return $this->forceFaiblesse;
     }
 
-    public function setForce(?string $force): static
+    public function setForceFaiblesse(?string $forceFaiblesse): void
     {
-        $this->force = $force;
-
-        return $this;
+        $this->forceFaiblesse = $forceFaiblesse;
     }
+
 
     public function getMatierePremiere(): ?string
     {
