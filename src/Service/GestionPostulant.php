@@ -62,16 +62,16 @@ class GestionPostulant
 
         // Création d'un utilisateur associé
         $code = $this->utilities->uniciteUser($postulant);
-        $user = $this->createUserForPostulant($postulant, $objectif, $code);
-        $postulant->setUser($user);
+//        $user = $this->createUserForPostulant($postulant, $objectif, $code);
+//        $postulant->setUser($user);
 
         // Création d'un tampon associé
-        $tampon = $this->createTamponForPostulant($postulant, $code);
+//        $tampon = $this->createTamponForPostulant($postulant, $code);
 
         // Persister les enregistrement
         $this->entityManager->persist($postulant);
-        $this->entityManager->persist($user);
-        $this->entityManager->persist($tampon);
+//        $this->entityManager->persist($user);
+//        $this->entityManager->persist($tampon);
         $this->entityManager->flush();
     }
 

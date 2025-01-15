@@ -75,7 +75,7 @@ class BackendPostulantController extends AbstractController
     {
         return $this->render('backend/postulant_show.html.twig',[
             'postulant' => $beneficiaire,
-            'compte' => $this->allRepositories->getTampon($beneficiaire->getTelephone()),
+//            'compte' => $this->allRepositories->getTampon($beneficiaire->getTelephone()),
             'user' => $this->allRepositories->getOneUser($beneficiaire->getTelephone()),
         ]);
     }

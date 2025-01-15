@@ -176,28 +176,28 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset class="reset mt-5">
-                                <legend class="reset">Compte utilisateur</legend>
+{#                            <fieldset class="reset mt-5">#}
+{#                                <legend class="reset">Compte utilisateur</legend>#}
 
-                                <div class="row block">
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Login</label>
-                                        <input type="text" class="form-control" value="{{ compte ? compte.name : ''}}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Mot de passe</label>
-                                        <input type="text" class="form-control" value="{{ compte ? compte.word|avocat ~ compte.code : '' }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Nombre de connexion</label>
-                                        <input type="text" class="form-control" value="{{ user ? user.connexion : '0' }}" disabled>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <label for="analphabete">Date dernière connexion</label>
-                                        <input type="text" class="form-control" value="{{ user ? user.connexion ? user.lastConnectedAt|date('Y-m-d H:i:s') : ''  }}" disabled>
-                                    </div>
-                                </div>
-                            </fieldset>
+{#                                <div class="row block">#}
+{#                                    <div class="col-md-6 mt-3">#}
+{#                                        <label for="analphabete">Login</label>#}
+{#                                        <input type="text" class="form-control" value="{{ compte ? compte.name : ''}}" disabled>#}
+{#                                    </div>#}
+{#                                    <div class="col-md-6 mt-3">#}
+{#                                        <label for="analphabete">Mot de passe</label>#}
+{#                                        <input type="text" class="form-control" value="{{ compte ? compte.word|avocat ~ compte.code : '' }}" disabled>#}
+{#                                    </div>#}
+{#                                    <div class="col-md-6 mt-3">#}
+{#                                        <label for="analphabete">Nombre de connexion</label>#}
+{#                                        <input type="text" class="form-control" value="{{ user ? user.connexion : '0' }}" disabled>#}
+{#                                    </div>#}
+{#                                    <div class="col-md-6 mt-3">#}
+{#                                        <label for="analphabete">Date dernière connexion</label>#}
+{#                                        <input type="text" class="form-control" value="{{ user ? user.connexion ? user.lastConnectedAt|date('Y-m-d H:i:s') : ''  }}" disabled>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </fieldset>#}
 
 
 

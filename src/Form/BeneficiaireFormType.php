@@ -144,7 +144,8 @@ class BeneficiaireFormType extends AbstractType
                     "Divorcé(e)" => "DIVORCE(E)",
                     "Veuf(ve)" => "VEUF(VE)"
                 ],
-                'label' => "Situation matrimoniale *"
+                'label' => "Situation matrimoniale",
+                'required' => false
             ])
             ->add('hebergement', ChoiceType::class,[
                 'attr' => ['class' => 'form-select'],
@@ -155,7 +156,8 @@ class BeneficiaireFormType extends AbstractType
                     "Chez mes amis" => "CHEZ MES AMIS",
                     "Autre" => "AUTRES"
                 ],
-                'label' => "Hebergement *"
+                'label' => "Hebergement",
+                'required' => false
             ])
             ->add('typeRessource', ChoiceType::class,[
                 'attr' => ['class' => 'form-select'],

@@ -77,7 +77,8 @@ class ProjetEntrepriseType extends AbstractType
             ])
             ->add('clientFutur', TextareaType::class,[
                 'attr' => ['class' => 'form-control', 'autocomplete'=>"off"],
-                'label' => "Qui sont les clients futurs? *"
+                'label' => "Qui sont les clients futurs?",
+                'required' => false
             ])
             ->add('concurrent', TextareaType::class,[
                 'attr' => ['class' => 'form-control', 'autocomplete'=>"off"],
@@ -96,7 +97,8 @@ class ProjetEntrepriseType extends AbstractType
             ])
             ->add('fixeProduit', TextType::class,[
                 'attr' => ['class' => 'form-control', 'autocomplete'=>"off"],
-                'label' => "Comment fixez-vous le prix? *"
+                'label' => "Comment fixez-vous le prix?",
+                'required' => false
             ])
             ->add('modePaiement', ChoiceType::class,[
                 'attr' => ['class' => 'form-select'],
@@ -105,7 +107,8 @@ class ProjetEntrepriseType extends AbstractType
                     'Cash' => 'CASH',
                     'Crédit' => 'CREDIT'
                 ],
-                'label' => "Condition de paiement *"
+                'label' => "Condition de paiement",
+                'required' => false
             ])
             ->add('modeVente', ChoiceType::class,[
                 'attr' => ['class' => 'form-select'],
@@ -115,7 +118,8 @@ class ProjetEntrepriseType extends AbstractType
                     'Avec des distributeurs' => 'DISTRIBUTEUR',
                     'Détaillants' => 'DETAILLANTS'
                 ],
-                'label' => "Comment allez-vous vendre vos produits? *"
+                'label' => "Comment allez-vous vendre vos produits?",
+                'required' => false
             ])
             ->add('promotion', ChoiceType::class,[
                 'attr' => ['class' => 'form-select'],

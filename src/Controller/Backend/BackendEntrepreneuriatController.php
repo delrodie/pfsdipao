@@ -32,8 +32,8 @@ class BackendEntrepreneuriatController extends AbstractController
     {
         return $this->render('backend/entrepreneurait_show.html.twig',[
             'postulant' => $beneficiaire,
-            'compte' => $this->allRepositories->getTampon($beneficiaire->getTelephone()),
-            'user' => $this->allRepositories->getOneUser($beneficiaire->getTelephone()),
+//            'compte' => $this->allRepositories->getTampon($beneficiaire->getTelephone()),
+//            'user' => $this->allRepositories->getOneUser($beneficiaire->getTelephone()),
             'entreprises' => $this->allRepositories->getAllEntrepriseByBeneficiaire($beneficiaire)
         ]);
     }
